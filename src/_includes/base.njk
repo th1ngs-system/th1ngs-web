@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="{{ lang | default('en') }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description | default('Th1ngs — The flexible platform to manage everything your team needs to track.') }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="topnav">
+  <div class="nav-container">
+    <a href="/" class="nav-brand">
+      <img src="/img/th1ngs-logo.png" alt="Th1ngs" height="26">
+    </a>
+    <div class="nav-actions">
+      <a href="/login" class="nav-login">Login</a>
+      <a href="/signup" class="nav-cta">Sign up</a>
+    </div>
+  </div>
+</nav>
+
+{{ content | safe }}
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 Th1ngs. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="https://doc.th1ngs.com" target="_blank" rel="noopener">
+        <i class="bi bi-book"></i> Documentation
+      </a>
+      <a href="/login">
+        <i class="bi bi-box-arrow-in-right"></i> Login
+      </a>
+    </div>
+  </div>
+</footer>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,214 @@
+---
+layout: base.njk
+title: Th1ngs — Manage everyThing
+description: A flexible platform that adapts to what you need to track — no coding required. From tasks and projects to assets and support queues, Th1ngs handles it all.
+---
+
+<main>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <span class="badge-pill">NOW IN BETA</span>
+      <h1 class="hero-title">
+        Manage every<span class="grad-text">Thing</span>
+      </h1>
+      <p class="hero-sub">
+        A flexible platform that adapts to what you need to track — no coding required.
+        From tasks and projects to assets and support queues, Th1ngs handles it all.
+      </p>
+      <div class="hero-ctas">
+        <a href="/signup" class="btn-primary-lg">Get Started Free</a>
+        <a href="https://doc.th1ngs.com" class="btn-ghost-lg" target="_blank" rel="noopener">
+          <i class="bi bi-book"></i> View Documentation
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURES GRID ── -->
+  <section class="features-section">
+    <div class="section-inner">
+      <span class="section-label">Features</span>
+      <h2 class="section-title">Everything you need,<br>nothing you don't</h2>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <span class="feat-icon">📦</span>
+          <div class="feat-title">Boxes</div>
+          <div class="feat-desc">Containers that group related Things. Each box has its own schema, workflow and access controls.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">🗒️</span>
+          <div class="feat-title">Things</div>
+          <div class="feat-desc">The core unit. Tasks, tickets, assets, entries — anything you want to track with a unique key like <code>PROJ-42</code>.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">⚙️</span>
+          <div class="feat-title">Custom Fields</div>
+          <div class="feat-desc">Design the exact schema you need: text, numbers, dates, dropdowns, users, money, geo-coordinates.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">🔄</span>
+          <div class="feat-title">Workflows</div>
+          <div class="feat-desc">YAML-defined state machines. Guide Things through lifecycle stages with conditions and validators.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">📧</span>
+          <div class="feat-title">Email Integration</div>
+          <div class="feat-desc">Connect an IMAP mailbox. New threads create Things; replies add comments automatically.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">🤖</span>
+          <div class="feat-title">AI / MCP</div>
+          <div class="feat-desc">Connect Claude, ChatGPT or any MCP client to search and create Things via natural language.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section class="how-section">
+    <div class="section-inner">
+      <span class="section-label light">How it works</span>
+      <h2 class="section-title light">Up and running in minutes</h2>
+      <div class="steps-strip">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Create a Box</div>
+            <div class="step-desc">Pick a type — Tasks, Agile, Places, and more — then give it a short key like <code>PROJ</code>.</div>
+          </div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Define your schema</div>
+            <div class="step-desc">Add custom fields and configure the workflow states that match your process exactly.</div>
+          </div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Track your Things</div>
+            <div class="step-desc">Create, comment, attach files, advance workflows — and connect your AI or email.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WORKFLOWS SPLIT ── -->
+  <section class="split-section">
+    <div class="section-inner split-inner">
+      <div class="split-text">
+        <span class="section-label">Workflows</span>
+        <h2 class="split-title">Flexible Workflows</h2>
+        <p class="split-desc">Define states, transitions, conditions and validators. Guide work through exactly the stages your process requires — without code.</p>
+        <ul class="split-list">
+          <li><i class="bi bi-check2-circle"></i> Visual state machine with colored status pills</li>
+          <li><i class="bi bi-check2-circle"></i> Conditions &amp; validators gate transitions</li>
+          <li><i class="bi bi-check2-circle"></i> Post-functions run automatically on transition</li>
+        </ul>
+      </div>
+      <div class="split-visual">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-dot red"></span>
+            <span class="code-dot yellow"></span>
+            <span class="code-dot green"></span>
+            <span class="code-filename">workflow.yaml</span>
+          </div>
+          <pre><span class="hk">name</span>: <span class="hs">Simple Task Workflow</span>
+<span class="hk">initial_state</span>: <span class="hs">open</span>
+<span class="hk">states</span>:
+  - <span class="hk">id</span>: <span class="hs">open</span>
+    <span class="hk">label</span>: <span class="hs">Open</span>
+    <span class="hk">color</span>: <span class="hs">"#6366f1"</span>
+  - <span class="hk">id</span>: <span class="hs">in_progress</span>
+    <span class="hk">label</span>: <span class="hs">In Progress</span>
+    <span class="hk">color</span>: <span class="hs">"#f59e0b"</span>
+  - <span class="hk">id</span>: <span class="hs">done</span>
+    <span class="hk">label</span>: <span class="hs">Done</span>
+    <span class="hk">color</span>: <span class="hs">"#22c55e"</span>
+<span class="hk">transitions</span>:
+  - <span class="hk">from</span>: <span class="hs">open</span>
+    <span class="hk">to</span>:   <span class="hs">in_progress</span>
+    <span class="hk">label</span>: <span class="hs">Start Work</span>
+  - <span class="hk">from</span>: <span class="hs">in_progress</span>
+    <span class="hk">to</span>:   <span class="hs">done</span>
+    <span class="hk">label</span>: <span class="hs">Mark Complete</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INTEGRATIONS ── -->
+  <section class="integrations-section">
+    <div class="section-inner">
+      <span class="section-label">Integrations</span>
+      <h2 class="section-title">Built for Integrations</h2>
+      <p class="integrations-desc">Connect Th1ngs to the tools and workflows you already use — via REST API, email, or AI.</p>
+      <div class="int-grid">
+        <div class="int-card">
+          <i class="bi bi-braces int-icon"></i>
+          <div class="int-title">REST API</div>
+          <div class="int-desc">Full JSON REST API with JWT and Personal Access Token auth. Create, update, search and manage Things programmatically from any language or tool.</div>
+          <a href="https://doc.th1ngs.com#api" class="int-link" target="_blank" rel="noopener">Read API docs <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="int-card">
+          <i class="bi bi-cpu int-icon"></i>
+          <div class="int-title">AI / MCP</div>
+          <div class="int-desc">Th1ngs ships a built-in MCP server. Point Claude, ChatGPT, or any MCP-compatible AI to <code>/mcp/sse</code> and start managing Things by chat.</div>
+          <a href="https://doc.th1ngs.com#mcp" class="int-link" target="_blank" rel="noopener">Learn about MCP <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="int-card">
+          <i class="bi bi-envelope int-icon"></i>
+          <div class="int-title">Email</div>
+          <div class="int-desc">Connect an IMAP mailbox to a Box. Incoming emails create new Things; reply threads automatically append as comments. Attachments included.</div>
+          <a href="https://doc.th1ngs.com#email" class="int-link" target="_blank" rel="noopener">Set up email <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HIERARCHY ── -->
+  <section class="hierarchy-section">
+    <div class="section-inner hier-inner">
+      <span class="section-label">Data Model</span>
+      <h2 class="section-title">A clear three-level hierarchy</h2>
+      <div class="hier-visual">
+        <div class="hier-box hi-site">
+          <span class="hico">🏢</span>
+          <div class="hlbl">Site</div>
+          <div class="hsub">Multi-tenant root</div>
+        </div>
+        <div class="hier-arrow"><i class="bi bi-arrow-right"></i></div>
+        <div class="hier-box hi-box">
+          <span class="hico">📦</span>
+          <div class="hlbl">Box</div>
+          <div class="hsub">Groups of Things</div>
+        </div>
+        <div class="hier-arrow"><i class="bi bi-arrow-right"></i></div>
+        <div class="hier-box hi-thing">
+          <span class="hico">🗒️</span>
+          <div class="hlbl">Thing</div>
+          <div class="hsub">Individual items</div>
+        </div>
+      </div>
+      <p class="hier-desc">A <strong>Site</strong> is your organization. Inside it, you create <strong>Boxes</strong> — each with its own schema, workflow, and access control. Inside each Box are your <strong>Things</strong> — the tasks, tickets, assets, or any entities you track.</p>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ── -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2 class="cta-title">Ready to manage every<span class="cta-grad">Thing</span>?</h2>
+      <p class="cta-sub">Join teams already using Th1ngs to organize their work.</p>
+      <a href="/signup" class="btn-cta-white">Start for free <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </section>
+
+</main>
