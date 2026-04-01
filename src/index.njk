@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 title: Th1ngs — Manage everyThing
-description: A flexible platform that adapts to what you need to track — no coding required. From tasks and projects to assets and support queues, Th1ngs handles it all.
+description: Manage anything that has information. Store it in typed Boxes, connect Things through relationships, and keep it all organized — your way, where you want.
 ---
 
 <main>
@@ -15,11 +15,11 @@ description: A flexible platform that adapts to what you need to track — no co
         Manage every<span class="grad-text">Thing</span>
       </h1>
       <p class="hero-sub">
-        A flexible platform that adapts to what you need to track — no coding required.
-        From tasks and projects to assets and support queues, Th1ngs handles it all.
+        Anything that has information belongs in Th1ngs — and if it has a workflow, even better.
+        Store your data in typed Boxes, connect Things through relationships, and keep everything organized your way.
       </p>
       <div class="hero-ctas">
-        <a href="/signup" class="btn-primary-lg">Get Started Free</a>
+        <a href="#contactModal" class="btn-primary-lg" data-bs-toggle="modal" data-bs-target="#contactModal">Get Started Free</a>
         <a href="https://doc.th1ngs.com" class="btn-ghost-lg" target="_blank" rel="noopener">
           <i class="bi bi-book"></i> View Documentation
         </a>
@@ -36,12 +36,12 @@ description: A flexible platform that adapts to what you need to track — no co
         <div class="feat-card">
           <span class="feat-icon">📦</span>
           <div class="feat-title">Boxes</div>
-          <div class="feat-desc">Containers that group related Things. Each box has its own schema, workflow and access controls.</div>
+          <div class="feat-desc">Typed containers that classify your Things. Storing contacts is not the same as storing tasks, emails, or support requests — each Box type adapts to what you need.</div>
         </div>
         <div class="feat-card">
-          <span class="feat-icon">🗒️</span>
-          <div class="feat-title">Things</div>
-          <div class="feat-desc">The core unit. Tasks, tickets, assets, entries — anything you want to track with a unique key like <code>PROJ-42</code>.</div>
+          <span class="feat-icon">🔗</span>
+          <div class="feat-title">Relations</div>
+          <div class="feat-desc">Connect Things to each other across Boxes. Link a contact to their requests, a task to its project, an asset to its location — your data, connected.</div>
         </div>
         <div class="feat-card">
           <span class="feat-icon">⚙️</span>
@@ -54,9 +54,9 @@ description: A flexible platform that adapts to what you need to track — no co
           <div class="feat-desc">YAML-defined state machines. Guide Things through lifecycle stages with conditions and validators.</div>
         </div>
         <div class="feat-card">
-          <span class="feat-icon">📧</span>
-          <div class="feat-title">Email Integration</div>
-          <div class="feat-desc">Connect an IMAP mailbox. New threads create Things; replies add comments automatically.</div>
+          <span class="feat-icon">🔌</span>
+          <div class="feat-title">Plugins</div>
+          <div class="feat-desc">Extend Th1ngs when you need more. New Box types and capabilities are continuously added — and the plugin system lets you go further.</div>
         </div>
         <div class="feat-card">
           <span class="feat-icon">🤖</span>
@@ -77,7 +77,7 @@ description: A flexible platform that adapts to what you need to track — no co
           <div class="step-num">1</div>
           <div class="step-body">
             <div class="step-title">Create a Box</div>
-            <div class="step-desc">Pick a type — Tasks, Agile, Places, and more — then give it a short key like <code>PROJ</code>.</div>
+            <div class="step-desc">Pick a type — Contacts, Tasks, Agile, Places, and more — then give it a short key like <code>PROJ</code>.</div>
           </div>
         </div>
         <div class="step-connector"></div>
@@ -206,9 +206,35 @@ description: A flexible platform that adapts to what you need to track — no co
   <section class="cta-section">
     <div class="cta-inner">
       <h2 class="cta-title">Ready to manage every<span class="cta-grad">Thing</span>?</h2>
-      <p class="cta-sub">Join teams already using Th1ngs to organize their work.</p>
-      <a href="/signup" class="btn-cta-white">Start for free <i class="bi bi-arrow-right"></i></a>
+      <p class="cta-sub">Deploy on cloud or your own infrastructure. Customize everything. Extend with plugins.</p>
+      <a href="#contactModal" class="btn-cta-white" data-bs-toggle="modal" data-bs-target="#contactModal">Start for free <i class="bi bi-arrow-right"></i></a>
     </div>
   </section>
 
 </main>
+
+<!-- ── CONTACT MODAL ── -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content contact-modal-content">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title contact-modal-title" id="contactModalLabel">Get started with Th1ngs</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-2">
+        <p class="contact-modal-sub">Leave your email and we'll reach out to set you up.</p>
+        <form action="https://formspree.io/f/mqegqnrl" method="POST" class="contact-form" id="contactForm">
+          <div class="mb-3">
+            <label for="contactEmail" class="form-label contact-label">Your email</label>
+            <input type="email" name="email" id="contactEmail" class="form-control contact-input" placeholder="you@example.com" required>
+          </div>
+          <div class="mb-4">
+            <label for="contactMessage" class="form-label contact-label">Message <span class="optional-hint">(optional)</span></label>
+            <textarea name="message" id="contactMessage" class="form-control contact-input" rows="3" placeholder="Tell us what you want to manage…"></textarea>
+          </div>
+          <button type="submit" class="btn-contact-submit w-100">Send <i class="bi bi-arrow-right"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

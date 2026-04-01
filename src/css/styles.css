@@ -410,6 +410,67 @@ code {
 }
 .footer-links a:hover { color: #a1a1aa; }
 
+/* ── Contact Modal ── */
+.contact-modal-content {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 1rem;
+  color: #f4f4f5;
+}
+.contact-modal-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f4f4f5;
+}
+.contact-modal-sub {
+  color: #a1a1aa;
+  font-size: .9rem;
+  margin-bottom: 1.5rem;
+}
+.contact-label {
+  color: #a1a1aa;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: .4rem;
+}
+.optional-hint { font-weight: 400; text-transform: none; letter-spacing: 0; color: #71717a; }
+.contact-input {
+  background: #09090b;
+  border: 1px solid #27272a;
+  border-radius: .5rem;
+  color: #f4f4f5;
+  font-size: .95rem;
+  padding: .65rem 1rem;
+  transition: border-color .15s;
+}
+.contact-input::placeholder { color: #52525b; }
+.contact-input:focus {
+  background: #09090b;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,.15);
+  color: #f4f4f5;
+  outline: none;
+}
+.btn-contact-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: .5rem;
+  font-size: .95rem;
+  font-weight: 600;
+  padding: .75rem 1.5rem;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+.btn-contact-submit:hover { background: #5254cc; transform: translateY(-1px); }
+
 /* ── Animations ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(12px); }

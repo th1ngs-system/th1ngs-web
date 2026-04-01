@@ -1,0 +1,39 @@
+# Th1ngs
+
+> Th1ngs is a system to manage anything that has information — and if it also has a workflow, even better. Organize your data into typed Boxes, connect Things through relationships, and keep everything flowing your way.
+
+## About
+
+Th1ngs is a flexible management platform where any kind of information can be stored, organized, and connected. Entities called "Things" live inside typed containers called "Boxes". Things can be linked to each other, building a connected graph of your organizational data.
+
+Th1ngs can be seen as a management tool for everything, or a place to store related items that need to stay connected. Those relationships are what keep your information truly organized.
+
+## Key Concepts
+
+- **Site**: Your organization — the multi-tenant root that contains all Boxes and Things.
+- **Boxes**: Typed containers that classify Things. Storing contacts is not the same as storing tasks, emails, or support requests — each Box type adapts to what you need. The Box type defines the schema, workflow, and access controls.
+- **Things**: Individual items tracked with a unique key (e.g. PROJ-42). Tasks, tickets, contacts, assets, support requests — anything with information. Things can be connected to each other through Relations.
+- **Relations**: Links between Things across Boxes. Connect a contact to their support requests, a task to its project, an asset to its location.
+- **Custom Fields**: Full schema control — text, numbers, dates, dropdowns, users, money, geo-coordinates, and more.
+- **Workflows**: YAML-defined state machines with states, transitions, conditions, validators, and post-functions.
+- **Plugins**: Extend Th1ngs when you need more. New Box types and capabilities are continuously added via the plugin system.
+
+## Freedom
+
+Th1ngs is built on three freedoms:
+- **Deploy where you want**: cloud (available now) or self-hosted data center (coming soon).
+- **Store things how you want**: full control over your schema, workflows, and data model — no code required.
+- **Extend when you need**: the plugin system lets you add new Box types and capabilities.
+
+## Integrations
+
+- **REST API**: Full JSON API with JWT and Personal Access Token auth. Create, update, search and manage Things from any language or tool.
+- **AI / MCP**: Built-in MCP server at `/mcp/sse`. Compatible with Claude, ChatGPT, and any MCP-capable AI assistant. Manage Things by natural language.
+- **Email (IMAP)**: Connect a mailbox to a Box. Incoming emails create new Things; reply threads append as comments. Attachments included.
+
+## Links
+
+- [Documentation](https://doc.th1ngs.com)
+- [API Reference](https://doc.th1ngs.com#api)
+- [MCP Guide](https://doc.th1ngs.com#mcp)
+- [Email Integration](https://doc.th1ngs.com#email)
