@@ -19,7 +19,7 @@ description: Manage anything that has information. Store it in typed Boxes, conn
         Store your data in typed Boxes, connect Things through relationships, and keep everything organized your way.
       </p>
       <div class="hero-ctas">
-        <a href="#contactModal" class="btn-primary-lg" data-bs-toggle="modal" data-bs-target="#contactModal">Get Started Free</a>
+        <a href="#" class="btn-primary-lg" onclick="openContactModal();return false;">Get Started Free</a>
         <a href="https://doc.th1ngs.com" class="btn-ghost-lg" target="_blank" rel="noopener">
           <i class="bi bi-book"></i> View Documentation
         </a>
@@ -207,34 +207,50 @@ description: Manage anything that has information. Store it in typed Boxes, conn
     <div class="cta-inner">
       <h2 class="cta-title">Ready to manage every<span class="cta-grad">Thing</span>?</h2>
       <p class="cta-sub">Deploy on cloud or your own infrastructure. Customize everything. Extend with plugins.</p>
-      <a href="#contactModal" class="btn-cta-white" data-bs-toggle="modal" data-bs-target="#contactModal">Start for free <i class="bi bi-arrow-right"></i></a>
+      <a href="#" class="btn-cta-white" onclick="openContactModal();return false;">Start for free <i class="bi bi-arrow-right"></i></a>
     </div>
   </section>
 
 </main>
 
 <!-- ── CONTACT MODAL ── -->
-<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content contact-modal-content">
-      <div class="modal-header border-0 pb-0">
-        <h5 class="modal-title contact-modal-title" id="contactModalLabel">Get started with Th1ngs</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body pt-2">
-        <p class="contact-modal-sub">Leave your email and we'll reach out to set you up.</p>
-        <form action="https://formspree.io/f/mqegqnrl" method="POST" class="contact-form" id="contactForm">
-          <div class="mb-3">
-            <label for="contactEmail" class="form-label contact-label">Your email</label>
-            <input type="email" name="email" id="contactEmail" class="form-control contact-input" placeholder="you@example.com" required>
-          </div>
-          <div class="mb-4">
-            <label for="contactMessage" class="form-label contact-label">Message <span class="optional-hint">(optional)</span></label>
-            <textarea name="message" id="contactMessage" class="form-control contact-input" rows="3" placeholder="Tell us what you want to manage…"></textarea>
-          </div>
-          <button type="submit" class="btn-contact-submit w-100">Send <i class="bi bi-arrow-right"></i></button>
-        </form>
-      </div>
+<div id="contactModal" class="c-modal-overlay" aria-hidden="true" onclick="if(event.target===this)closeContactModal()">
+  <div class="c-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="contactModalLabel">
+    <div class="c-modal-header">
+      <h5 class="contact-modal-title" id="contactModalLabel">Get started with Th1ngs</h5>
+      <button class="c-modal-close" onclick="closeContactModal()" aria-label="Close">&times;</button>
+    </div>
+    <div class="c-modal-body">
+      <p class="contact-modal-sub">Leave your email and we'll reach out to set you up.</p>
+      <form action="https://formspree.io/f/mqegqnrl" method="POST" class="contact-form">
+        <div class="c-field">
+          <label for="contactEmail" class="contact-label">Your email</label>
+          <input type="email" name="email" id="contactEmail" class="contact-input" placeholder="you@example.com" required>
+        </div>
+        <div class="c-field">
+          <label for="contactMessage" class="contact-label">Message <span class="optional-hint">(optional)</span></label>
+          <textarea name="message" id="contactMessage" class="contact-input" rows="3" placeholder="Tell us what you want to manage…"></textarea>
+        </div>
+        <button type="submit" class="btn-contact-submit">Send <i class="bi bi-arrow-right"></i></button>
+      </form>
     </div>
   </div>
 </div>
+
+<script>
+  function openContactModal() {
+    var m = document.getElementById('contactModal');
+    m.classList.add('is-open');
+    m.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeContactModal() {
+    var m = document.getElementById('contactModal');
+    m.classList.remove('is-open');
+    m.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeContactModal();
+  });
+</script>
