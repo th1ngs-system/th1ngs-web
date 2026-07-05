@@ -53,6 +53,13 @@ code {
   transition: color .15s;
 }
 .nav-link:hover { color: #fff; }
+.nav-toggle {
+  display: none;
+  background: none; border: none; color: #fff;
+  width: 40px; height: 40px; align-items: center; justify-content: center;
+  font-size: 1.35rem; cursor: pointer; border-radius: 6px; flex-shrink: 0;
+}
+.nav-toggle:hover { background: #27272a; }
 .nav-login {
   color: #a1a1aa; font-size: .82rem; font-weight: 500;
   padding: .35rem .8rem; border-radius: 6px;
@@ -519,7 +526,17 @@ code {
 
 @media (max-width: 768px) {
   .nav-container { padding: 0 1.25rem; }
-  .nav-actions { flex-wrap: wrap; justify-content: flex-end; row-gap: .35rem; }
+  .nav-toggle { display: flex; }
+  .nav-actions {
+    display: none;
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: .15rem;
+    background: #18181b; border-bottom: 1px solid #2a2a2e;
+    padding: .5rem 1.25rem 1.1rem;
+  }
+  .nav-actions.open { display: flex; }
+  .nav-link { padding: .65rem .5rem; }
+  .nav-cta { text-align: center; margin-top: .5rem; }
   .section-inner { padding: 3.5rem 1.25rem; }
   .hero-inner { padding: 4.5rem 1.25rem 5rem; }
   .hero-title { font-size: 2.8rem; }
