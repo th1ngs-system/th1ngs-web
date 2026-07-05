@@ -1,0 +1,423 @@
+---
+layout: docs-base.njk
+title: Documentation
+description: Complete documentation for Th1ngs — the flexible item and task management platform.
+---
+
+<main class="content">
+
+  <!-- ─── GETTING STARTED ─── -->
+  <section class="doc-section visible" id="sec-getting-started">
+    <h1>Getting Started</h1>
+    <p class="doc-lead">Everything you need to start tracking, organizing, and managing your work with Th1ngs.</p>
+
+    <h2>What is Th1ngs?</h2>
+    <p><strong>Th1ngs</strong> is a flexible item and task management platform. Think of it as a programmable tracker: you define what you want to track, how it's organized, and the lifecycle each item goes through — no coding required.</p>
+
+    <div class="feat-grid">
+      <div class="feat-card" data-sec="boxes"><span class="fi">📦</span><div class="ft">Boxes</div><div class="fd">Containers that group related Things — like a project board or issue queue.</div></div>
+      <div class="feat-card" data-sec="things"><span class="fi">🗂️</span><div class="ft">Things</div><div class="fd">The core unit — a task, ticket, asset, or any item you want to track.</div></div>
+      <div class="feat-card" data-sec="custom-fields"><span class="fi">⚙️</span><div class="ft">Custom Fields</div><div class="fd">Attach typed metadata: text, numbers, dates, dropdowns, users.</div></div>
+      <div class="feat-card" data-sec="workflows"><span class="fi">🔄</span><div class="ft">Workflows</div><div class="fd">State machines that guide Things through lifecycle stages.</div></div>
+      <div class="feat-card" data-sec="email"><span class="fi">📧</span><div class="ft">Email</div><div class="fd">Create and comment on Things directly via email threads.</div></div>
+      <div class="feat-card" data-sec="mcp"><span class="fi">🤖</span><div class="ft">AI / MCP</div><div class="fd">Connect LLMs to search and create Things via the MCP protocol.</div></div>
+    </div>
+
+    <h2>Quick Setup</h2>
+    <ol class="steps">
+      <li><div class="step-n">1</div><div class="sc"><strong>Create an account</strong><p>Sign up with your email or Google account. After a short review your account is activated.</p></div></li>
+      <li><div class="step-n">2</div><div class="sc"><strong>Create your first Box</strong><p>Click <em>New Box</em>, pick a box type (Tasks, Agile, Places …) and give it a short key like <code>PROJ</code>.</p></div></li>
+      <li><div class="step-n">3</div><div class="sc"><strong>Add Things</strong><p>Inside the box, click <em>New Thing</em>. Fill in the summary, custom fields, and set a workflow state.</p></div></li>
+      <li><div class="step-n">4</div><div class="sc"><strong>Invite collaborators</strong><p>In Box Settings → People, grant access to teammates by role: Viewer, Editor, or Admin.</p></div></li>
+      <li><div class="step-n">5</div><div class="sc"><strong>Configure your workflow</strong><p>Define the states Things move through and which transitions are allowed.</p></div></li>
+    </ol>
+
+    <div class="callout callout-tip">
+      <i class="bi bi-stars"></i>
+      <div>You can keep a Box <strong>public</strong> so anyone can browse it without logging in, or make it <strong>private</strong> and control access per user.</div>
+    </div>
+  </section>
+
+  <!-- ─── CORE CONCEPTS ─── -->
+  <section class="doc-section" id="sec-concepts">
+    <h1>Core Concepts</h1>
+    <p class="doc-lead">The hierarchy and data model behind Th1ngs.</p>
+
+    <h2>The Three-Level Hierarchy</h2>
+
+    <div class="hier">
+      <div class="hier-item hi-a">
+        <span class="hico">🏢</span>
+        <div class="hlbl">Site</div>
+        <div class="hsub">Multi-tenant root</div>
+      </div>
+      <div class="hier-item hi-b">
+        <span class="hico">📦</span>
+        <div class="hlbl">Box</div>
+        <div class="hsub">Groups of Things</div>
+      </div>
+      <div class="hier-item hi-c">
+        <span class="hico">🗒️</span>
+        <div class="hlbl">Thing</div>
+        <div class="hsub">Individual items</div>
+      </div>
+    </div>
+
+    <h2>Anatomy of a Thing</h2>
+    <p>A <strong>Thing</strong> is the primary entity. It carries:</p>
+    <ul>
+      <li><strong>Key</strong> — unique ID like <code>PROJ-42</code>, auto-generated from the box key.</li>
+      <li><strong>Summary</strong> — one-line title.</li>
+      <li><strong>Description</strong> — rich-text body (often populated from email).</li>
+      <li><strong>Status</strong> — current workflow state (Open, In Progress, Done, …).</li>
+      <li><strong>Custom Fields</strong> — typed fields defined by the box schema.</li>
+      <li><strong>Comments</strong> — threaded discussion.</li>
+      <li><strong>Attachments</strong> — versioned files stored per Thing.</li>
+      <li><strong>Relations</strong> — links to other Things.</li>
+      <li><strong>History</strong> — full audit log of every change.</li>
+    </ul>
+
+    <h2>Box Types</h2>
+    <p>Each Box is created from a <em>Box Type</em> — a schema template that pre-configures the custom fields, default workflow, and view layout.</p>
+    <p>Built-in types include: <strong>Tasks</strong>, <strong>Agile / Software</strong>, <strong>Project Management</strong>, <strong>Places</strong>, <strong>Photo</strong>, and <strong>Guide</strong>.</p>
+
+    <h2>Permissions</h2>
+    <table class="dtable">
+      <thead><tr><th>Role</th><th>Capabilities</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Viewer</strong></td><td>Read Things, comments, attachments</td></tr>
+        <tr><td><strong>Editor</strong></td><td>Create &amp; edit Things, comments, attachments, advance workflows</td></tr>
+        <tr><td><strong>Admin</strong></td><td>Full access + box configuration, people management</td></tr>
+        <tr><td><strong>Super-Admin</strong></td><td>Cross-site access, system administration</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─── BOXES ─── -->
+  <section class="doc-section" id="sec-boxes">
+    <h1>Boxes</h1>
+    <p class="doc-lead">Boxes are the containers that group your Things. Each has its own schema, workflow, and access controls.</p>
+
+    <h2>Creating a Box</h2>
+    <p>Go to <strong>Boxes → New Box</strong> and choose:</p>
+    <ul>
+      <li><strong>Name</strong> — displayed everywhere.</li>
+      <li><strong>Key</strong> — short prefix like <code>PROJ</code>. Used in Thing keys (<code>PROJ-1</code>).</li>
+      <li><strong>Type</strong> — the schema template to start from.</li>
+      <li><strong>Visibility</strong> — public (anyone) or private (invited users only).</li>
+    </ul>
+
+    <div class="callout callout-info">
+      <i class="bi bi-info-circle"></i>
+      <div>Box keys are <strong>permanent</strong> — once set they can't be changed, because Thing keys like <code>PROJ-42</code> are derived from them.</div>
+    </div>
+
+    <h2>Box Settings</h2>
+    <table class="dtable">
+      <thead><tr><th>Section</th><th>What you configure</th></tr></thead>
+      <tbody>
+        <tr><td><strong>General</strong></td><td>Name, description, visibility, box type</td></tr>
+        <tr><td><strong>Custom Fields</strong></td><td>Add, edit, reorder, and mark required fields</td></tr>
+        <tr><td><strong>Workflow</strong></td><td>States, transitions, conditions and validators</td></tr>
+        <tr><td><strong>People</strong></td><td>Grant or revoke user roles (Viewer / Editor / Admin)</td></tr>
+        <tr><td><strong>Email</strong></td><td>Connect an IMAP mailbox to receive Things by email</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Built-in Box Types</h2>
+    <ul>
+      <li><strong>Tasks</strong> — Generic tracker with priority and assignee.</li>
+      <li><strong>Agile / Software</strong> — Sprints, story points, releases.</li>
+      <li><strong>Project Management</strong> — Phases, milestones, owners.</li>
+      <li><strong>Places</strong> — Items with geographic coordinates.</li>
+      <li><strong>Photo</strong> — Image-centric items with gallery view.</li>
+      <li><strong>Guide</strong> — Documentation-style knowledge base entries.</li>
+    </ul>
+  </section>
+
+  <!-- ─── THINGS ─── -->
+  <section class="doc-section" id="sec-things">
+    <h1>Things</h1>
+    <p class="doc-lead">Things are the primary objects — tasks, tickets, assets, entries, or anything else you want to track.</p>
+
+    <h2>Creating a Thing</h2>
+    <p>Click <strong>+ New</strong> in the navbar or from inside a Box. Provide:</p>
+    <ul>
+      <li><strong>Summary</strong> (required) — one-line title.</li>
+      <li><strong>Description</strong> — body text, often pre-filled from an incoming email.</li>
+      <li><strong>Custom Fields</strong> — any fields defined by the box schema.</li>
+      <li><strong>Status</strong> — the starting workflow state.</li>
+    </ul>
+
+    <h2>The Thing Detail Page</h2>
+    <p>From the detail page you can:</p>
+    <ul>
+      <li>Edit any field inline and save immediately.</li>
+      <li>Advance the workflow state via transition buttons.</li>
+      <li>Add, read and delete comments.</li>
+      <li>Upload files — versioned automatically as <code>report.pdf</code>, <code>report-2.pdf</code>, …</li>
+      <li>Create and remove relations to other Things.</li>
+      <li>Browse the full change history.</li>
+    </ul>
+
+    <h2>Thing Keys</h2>
+    <p>Every Thing gets a permanent key like <code>PROJ-42</code>. Keys are unique site-wide, human-readable, and searchable. Use them in comments or external tools to reference a specific Thing.</p>
+
+    <div class="callout callout-tip">
+      <i class="bi bi-search"></i>
+      <div>Use the search bar in the navbar to find any Thing instantly. Recent Things appear as autocomplete suggestions as you type.</div>
+    </div>
+
+    <h2>Relations</h2>
+    <p>Link two Things together with a relation type and an optional comment. Relations are bidirectional — both Things show the link. Delete a relation from either side.</p>
+
+    <h2>Attachments</h2>
+    <p>Files are stored under <code>{boxKey}/{thingId}/</code> with automatic versioning. Download or delete individual file versions from the Thing page.</p>
+  </section>
+
+  <!-- ─── CUSTOM FIELDS ─── -->
+  <section class="doc-section" id="sec-custom-fields">
+    <h1>Custom Fields</h1>
+    <p class="doc-lead">Attach typed metadata to every Thing in a Box. Design the schema that fits your workflow exactly.</p>
+
+    <h2>Field Types</h2>
+    <table class="dtable">
+      <thead><tr><th>Type</th><th>Use case</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Text</strong></td><td>Short labels, names, identifiers (up to 2000 chars)</td></tr>
+        <tr><td><strong>Long Text</strong></td><td>Descriptions, notes, rich content (unlimited)</td></tr>
+        <tr><td><strong>Number</strong></td><td>Story points, quantities, scores</td></tr>
+        <tr><td><strong>Date / DateTime</strong></td><td>Due dates, milestones, timestamps</td></tr>
+        <tr><td><strong>Money</strong></td><td>Monetary amounts with currency (e.g. USD, EUR)</td></tr>
+        <tr><td><strong>Effort</strong></td><td>Time estimates in hours/days</td></tr>
+        <tr><td><strong>Select</strong></td><td>Controlled vocabulary (Priority, Category, …)</td></tr>
+        <tr><td><strong>Multi-Select</strong></td><td>Tags, labels, multiple categories</td></tr>
+        <tr><td><strong>Select-Suggest</strong></td><td>Dynamic autocomplete backed by a provider (e.g. Countries)</td></tr>
+        <tr><td><strong>Radio</strong></td><td>Single-choice radio buttons</td></tr>
+        <tr><td><strong>User</strong></td><td>Assignee, reviewer, owner (references a user account)</td></tr>
+        <tr><td><strong>Email</strong></td><td>Email address with mailto link</td></tr>
+        <tr><td><strong>Earth Point</strong></td><td>Geographic coordinates (latitude/longitude)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Managing Fields</h2>
+    <p>Open <strong>Box Settings → Custom Fields</strong>. From there:</p>
+    <ul>
+      <li>Add a field — choose its name and type.</li>
+      <li>Mark a field as <em>required</em> to block saving if empty.</li>
+      <li>Reorder fields — the order determines form and list layout.</li>
+      <li>For Select fields, manage the list of allowed option values.</li>
+    </ul>
+
+    <h2>Select-Suggest Providers</h2>
+    <p>Fields of type <strong>select-suggest</strong> support dynamic option providers. A developer can implement the <code>SelectSuggestProvider</code> interface to fetch options from any external source (e.g. a REST API, a database).</p>
+    <pre><code>public interface SelectSuggestProvider {
+    String getKey();
+    List&lt;String&gt; suggest(String query);
+}</code></pre>
+    <p>Register your provider as a Spring bean — it will be auto-discovered and available in the admin field configuration.</p>
+    <p>Built-in providers: <code>countries</code> — fetches country names from a public REST API with a built-in static fallback.</p>
+
+    <div class="callout callout-warn">
+      <i class="bi bi-exclamation-triangle"></i>
+      <div>Deleting a custom field permanently removes all stored values for that field across every Thing in the Box. This cannot be undone.</div>
+    </div>
+  </section>
+
+  <!-- ─── WORKFLOWS ─── -->
+  <section class="doc-section" id="sec-workflows">
+    <h1>Workflows</h1>
+    <p class="doc-lead">Workflows are YAML-defined state machines that guide Things through a structured lifecycle.</p>
+
+    <h2>How Workflows Work</h2>
+    <p>A workflow defines:</p>
+    <ul>
+      <li><strong>States</strong> — stages a Thing can be in (Open, In Progress, Done …).</li>
+      <li><strong>Transitions</strong> — allowed moves between states.</li>
+      <li><strong>Conditions</strong> — rules that must pass before a transition is allowed.</li>
+      <li><strong>Validators</strong> — checks at transition time (e.g. a required field must be set).</li>
+      <li><strong>Post-functions</strong> — actions run automatically after a transition succeeds.</li>
+    </ul>
+
+    <h2>Example Workflow YAML</h2>
+<pre><span class="hk">name</span>: <span class="hs">Simple Task Workflow</span>
+<span class="hk">initial_state</span>: <span class="hs">open</span>
+<span class="hk">states</span>:
+  - <span class="hk">id</span>: <span class="hs">open</span>
+    <span class="hk">label</span>: <span class="hs">Open</span>
+    <span class="hk">color</span>: <span class="hs">"#6366f1"</span>
+  - <span class="hk">id</span>: <span class="hs">in_progress</span>
+    <span class="hk">label</span>: <span class="hs">In Progress</span>
+    <span class="hk">color</span>: <span class="hs">"#f59e0b"</span>
+  - <span class="hk">id</span>: <span class="hs">done</span>
+    <span class="hk">label</span>: <span class="hs">Done</span>
+    <span class="hk">color</span>: <span class="hs">"#22c55e"</span>
+<span class="hk">transitions</span>:
+  - <span class="hk">from</span>: <span class="hs">open</span>
+    <span class="hk">to</span>:   <span class="hs">in_progress</span>
+    <span class="hk">label</span>: <span class="hs">Start Work</span>
+  - <span class="hk">from</span>: <span class="hs">in_progress</span>
+    <span class="hk">to</span>:   <span class="hs">done</span>
+    <span class="hk">label</span>: <span class="hs">Mark Complete</span></pre>
+
+    <h2>Assigning a Workflow to a Box</h2>
+    <p>In <strong>Box Settings → Workflow</strong>, select the workflow schema to use. Changing the workflow doesn't reset existing Thing states — they keep their current state and follow the new transitions going forward.</p>
+
+    <h2>Agile Boards</h2>
+    <p>Boxes of type <em>Agile / Software</em> render workflow states as swim-lane columns. Drag Things between columns to trigger transitions. Releases (milestones) can be created and Things assigned to them for sprint-style planning.</p>
+  </section>
+
+  <!-- ─── EMAIL ─── -->
+  <section class="doc-section" id="sec-email">
+    <h1>Email Integration</h1>
+    <p class="doc-lead">Connect an IMAP mailbox to a Box and create Things — and add comments — entirely by email.</p>
+
+    <h2>How It Works</h2>
+    <p>Th1ngs polls the configured inbox on a schedule. For each unread message:</p>
+    <ul>
+      <li><strong>New thread</strong> — creates a new Thing. Subject becomes the summary; email body becomes the description.</li>
+      <li><strong>Reply to existing thread</strong> — adds a comment to the existing Thing. Quoted previous messages are stripped automatically.</li>
+      <li><strong>Attachments</strong> — saved directly to the Thing.</li>
+    </ul>
+
+    <h2>Connecting a Mailbox</h2>
+    <p>Go to <strong>Box Settings → Email → Connect IMAP Mailbox</strong>.</p>
+    <table class="dtable">
+      <thead><tr><th>Field</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Email / Username</strong></td><td>The mailbox login (usually the full email address)</td></tr>
+        <tr><td><strong>Password</strong></td><td>Mailbox password or app-specific password</td></tr>
+        <tr><td><strong>Server (Host)</strong></td><td>IMAP hostname — e.g. <code>imap.gmail.com</code></td></tr>
+        <tr><td><strong>Port</strong></td><td><code>993</code> for IMAPS (TLS) · <code>143</code> for plain IMAP</td></tr>
+        <tr><td><strong>Protocol</strong></td><td><code>imaps</code> (recommended) or <code>imap</code></td></tr>
+        <tr><td><strong>Folder</strong></td><td>Folder to monitor — default <code>INBOX</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <i class="bi bi-shield-lock"></i>
+      <div>For Gmail: enable IMAP in Gmail settings and use an <strong>App Password</strong> (not your regular password) when 2-Step Verification is active.</div>
+    </div>
+
+    <h2>Thread Tracking</h2>
+    <p>Th1ngs tracks email threads using the RFC 2822 <code>Message-ID</code>, <code>In-Reply-To</code>, and <code>References</code> headers. When a Thing is created from an email, its Message-ID is stored. Any future reply — including reply-to-reply chains — will add a comment to the same Thing rather than creating a new one.</p>
+
+    <h2>Quote Stripping</h2>
+    <p>When a reply becomes a comment, Th1ngs strips the quoted previous messages automatically. It handles:</p>
+    <ul>
+      <li><code>&gt;</code>-prefixed quoted lines in plain-text emails.</li>
+      <li>Multi-line <em>"On [date] … wrote:"</em> separators (Gmail, Outlook, Apple Mail).</li>
+      <li>HTML emails: removes <code>&lt;blockquote&gt;</code>, Gmail quote <code>div</code>s, Yahoo quoted sections, Outlook reply containers, and everything after <code>&lt;hr&gt;</code> dividers.</li>
+    </ul>
+  </section>
+
+  <!-- ─── REST API ─── -->
+  <section class="doc-section" id="sec-api">
+    <h1>REST API</h1>
+    <p class="doc-lead">Programmatic access to Th1ngs via a JSON REST API. Authenticate with JWT or Personal Access Tokens.</p>
+
+    <h2>Authentication</h2>
+    <ul>
+      <li><strong>JWT</strong> — POST credentials to <code>/rest/api/1/auth/login</code>, then pass the token as <code>Authorization: Bearer &lt;token&gt;</code>.</li>
+      <li><strong>Personal Access Tokens</strong> — generate in your profile settings; same bearer format.</li>
+      <li><strong>Google OAuth2</strong> — for browser-based flows.</li>
+    </ul>
+
+    <h2>Base URL</h2>
+<pre><span class="hs">https://th1ngs.com/rest/api/1/</span></pre>
+
+    <h2>Key Endpoints</h2>
+    <table class="dtable">
+      <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><span class="hb hb-get">GET</span></td><td><code>/boxes</code></td><td>List accessible boxes</td></tr>
+        <tr><td><span class="hb hb-get">GET</span></td><td><code>/boxes/{id}/things</code></td><td>List Things in a box</td></tr>
+        <tr><td><span class="hb hb-get">GET</span></td><td><code>/things/{key}</code></td><td>Get a Thing by key</td></tr>
+        <tr><td><span class="hb hb-post">POST</span></td><td><code>/boxes/{id}/things</code></td><td>Create a new Thing</td></tr>
+        <tr><td><span class="hb hb-put">PUT</span></td><td><code>/things/{key}</code></td><td>Update a Thing</td></tr>
+        <tr><td><span class="hb hb-del">DEL</span></td><td><code>/things/{key}</code></td><td>Delete a Thing</td></tr>
+        <tr><td><span class="hb hb-post">POST</span></td><td><code>/things/{key}/comments</code></td><td>Add a comment</td></tr>
+        <tr><td><span class="hb hb-get">GET</span></td><td><code>/things/recent</code></td><td>Recently viewed Things</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Example</h2>
+<pre><span class="hc"># List Things in box 42</span>
+curl -X GET \
+  https://th1ngs.com/rest/api/1/boxes/42/things \
+  -H <span class="hs">'Authorization: Bearer &lt;token&gt;'</span> \
+  -H <span class="hs">'Accept: application/json'</span></pre>
+
+    <div class="callout callout-info">
+      <i class="bi bi-file-earmark-code"></i>
+      <div>The full interactive API reference is available at <code>/api-docs.html</code> on your Th1ngs instance.</div>
+    </div>
+  </section>
+
+  <!-- ─── MCP / AI ─── -->
+  <section class="doc-section" id="sec-mcp">
+    <h1>AI / MCP Integration</h1>
+    <p class="doc-lead">Th1ngs includes a built-in MCP server — connect Claude, ChatGPT, or any MCP-compatible AI to search and manage your Things.</p>
+
+    <h2>What is MCP?</h2>
+    <p>The <strong>Model Context Protocol</strong> is an open standard that lets LLM-based tools connect to external data sources. Th1ngs acts as an MCP server; your AI assistant is the client.</p>
+
+    <h2>Connecting an AI Assistant</h2>
+    <p>In your AI tool's MCP configuration, point it to:</p>
+<pre><span class="hk">url</span>:  <span class="hs">https://th1ngs.com/mcp/sse</span>
+<span class="hk">type</span>: <span class="hs">sse</span></pre>
+    <p>No authentication is needed for public boxes. For private boxes, pass a Personal Access Token as a bearer header (depending on your AI client's configuration).</p>
+
+    <h2>Available Tools</h2>
+    <table class="dtable">
+      <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>list_boxes</code></td><td>List accessible boxes with metadata and thing types</td></tr>
+        <tr><td><code>search_things</code></td><td>Full-text search across accessible Things</td></tr>
+        <tr><td><code>get_thing</code></td><td>Fetch full detail of a single Thing by key</td></tr>
+        <tr><td><code>create_thing</code></td><td>Create a new Thing in a specified box (requires auth)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Privacy &amp; Access Control</h2>
+    <p>The MCP server enforces the same access controls as the web UI. Unauthenticated callers can only see public boxes. Private boxes require a valid user token — the same one you'd use for the REST API.</p>
+
+    <div class="callout callout-tip">
+      <i class="bi bi-robot"></i>
+      <div>Try telling your AI: <em>"Search my Th1ngs for open bugs tagged with PROJ"</em> — it will call <code>search_things</code> automatically and return results in context.</div>
+    </div>
+  </section>
+
+</main>
+
+{% block scripts %}
+<script>
+(function () {
+  var links    = document.querySelectorAll('.sb-link[data-sec]');
+  var sections = document.querySelectorAll('.doc-section');
+
+  function show(id) {
+    sections.forEach(function (s) { s.classList.remove('visible'); });
+    links.forEach(function (l) { l.classList.remove('active'); });
+    var sec = document.getElementById('sec-' + id);
+    if (sec) { sec.classList.add('visible'); window.scrollTo(0, 0); }
+    var lnk = document.querySelector('[data-sec="' + id + '"]');
+    if (lnk) lnk.classList.add('active');
+    history.replaceState(null, '', '#' + id);
+  }
+
+  links.forEach(function (l) {
+    l.addEventListener('click', function () { show(this.dataset.sec); });
+  });
+
+  document.querySelectorAll('.feat-card[data-sec]').forEach(function (card) {
+    card.addEventListener('click', function () { show(this.dataset.sec); });
+  });
+
+  var hash = window.location.hash.replace('#', '');
+  if (hash && document.getElementById('sec-' + hash)) {
+    show(hash);
+  }
+})();
+</script>
+{% endblock %}

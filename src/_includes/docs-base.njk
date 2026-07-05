@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="{{ lang | default('en') }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} — Th1ngs Docs</title>
+  <meta name="description" content="{{ description | default('Th1ngs product documentation') }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/docs-layout.css">
+  <link rel="stylesheet" href="/css/th1ngs-docs.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2S96NTD4J5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-2S96NTD4J5');
+  </script>
+
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a href="/" class="nav-brand"><img src="/img/th1ngs-logo.png" alt="Th1ngs!" height="24" style="vertical-align:middle;"></a>
+  <span class="nav-sep">/</span>
+  <span class="nav-label">Documentation</span>
+  <span class="nav-version">v1.0</span>
+  <div class="nav-actions">
+    <a href="https://th1ngs.com" class="nav-link-a" target="_blank" rel="noopener">
+      <i class="bi bi-arrow-up-right-square"></i> Try demo site
+    </a>
+    <a href="https://th1ngs.com/signup" class="nav-cta" target="_blank" rel="noopener">Get Started</a>
+  </div>
+</nav>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sb-group-label">Overview</div>
+    <div class="sb-group">
+      {% if page.url == '/docs/' or page.url == '/docs/index.html' %}
+      <button class="sb-link {% if activeSection == 'getting-started' or not activeSection %}active{% endif %}" data-sec="getting-started">
+        <i class="bi bi-rocket-takeoff"></i> Getting Started
+      </button>
+      <button class="sb-link {% if activeSection == 'concepts' %}active{% endif %}" data-sec="concepts">
+        <i class="bi bi-lightbulb"></i> Core Concepts
+      </button>
+      {% else %}
+      <a href="/docs/#getting-started" class="sb-link">
+        <i class="bi bi-rocket-takeoff"></i> Getting Started
+      </a>
+      <a href="/docs/#concepts" class="sb-link">
+        <i class="bi bi-lightbulb"></i> Core Concepts
+      </a>
+      {% endif %}
+    </div>
+
+    <div class="sb-group-label">Features</div>
+    <div class="sb-group">
+      {% if page.url == '/docs/' or page.url == '/docs/index.html' %}
+      <button class="sb-link {% if activeSection == 'boxes' %}active{% endif %}" data-sec="boxes">
+        <i class="bi bi-box"></i> Boxes
+      </button>
+      {% else %}
+      <a href="/docs/#boxes" class="sb-link"><i class="bi bi-box"></i> Boxes</a>
+      {% endif %}
+      <a href="/docs/box-types/" class="sb-link {% if '/docs/box-types/' in page.url and page.url != '/docs/box-types/mailbox/' and page.url != '/docs/box-types/stuff/' and page.url != '/docs/box-types/service-desk/' %}active{% endif %}">
+        <i class="bi bi-grid-1x2"></i> Box Types
+      </a>
+      <a href="/docs/box-types/mailbox/" class="sb-link sb-link-child {% if page.url == '/docs/box-types/mailbox/' %}active{% endif %}">
+        <i class="bi bi-envelope-at"></i> Mailbox
+      </a>
+      <a href="/docs/box-types/stuff/" class="sb-link sb-link-child {% if page.url == '/docs/box-types/stuff/' %}active{% endif %}">
+        <i class="bi bi-kanban"></i> Stuff
+      </a>
+      <a href="/docs/box-types/service-desk/" class="sb-link sb-link-child {% if page.url == '/docs/box-types/service-desk/' %}active{% endif %}">
+        <i class="bi bi-headset"></i> Service Desk
+      </a>
+      {% if page.url == '/docs/' or page.url == '/docs/index.html' %}
+      <button class="sb-link {% if activeSection == 'things' %}active{% endif %}" data-sec="things">
+        <i class="bi bi-ui-checks-grid"></i> Things
+      </button>
+      <button class="sb-link {% if activeSection == 'custom-fields' %}active{% endif %}" data-sec="custom-fields">
+        <i class="bi bi-sliders"></i> Custom Fields
+      </button>
+      <button class="sb-link {% if activeSection == 'workflows' %}active{% endif %}" data-sec="workflows">
+        <i class="bi bi-diagram-3"></i> Workflows
+      </button>
+      {% else %}
+      <a href="/docs/#things" class="sb-link"><i class="bi bi-ui-checks-grid"></i> Things</a>
+      <a href="/docs/#custom-fields" class="sb-link"><i class="bi bi-sliders"></i> Custom Fields</a>
+      <a href="/docs/#workflows" class="sb-link"><i class="bi bi-diagram-3"></i> Workflows</a>
+      {% endif %}
+    </div>
+
+    <div class="sb-group-label">Integrations</div>
+    <div class="sb-group">
+      {% if page.url == '/docs/' or page.url == '/docs/index.html' %}
+      <button class="sb-link {% if activeSection == 'email' %}active{% endif %}" data-sec="email">
+        <i class="bi bi-envelope"></i> Email Integration
+      </button>
+      <button class="sb-link {% if activeSection == 'api' %}active{% endif %}" data-sec="api">
+        <i class="bi bi-braces"></i> REST API
+      </button>
+      <button class="sb-link {% if activeSection == 'mcp' %}active{% endif %}" data-sec="mcp">
+        <i class="bi bi-cpu"></i> AI / MCP
+      </button>
+      {% else %}
+      <a href="/docs/#email" class="sb-link"><i class="bi bi-envelope"></i> Email Integration</a>
+      <a href="/docs/#api" class="sb-link"><i class="bi bi-braces"></i> REST API</a>
+      <a href="/docs/#mcp" class="sb-link"><i class="bi bi-cpu"></i> AI / MCP</a>
+      {% endif %}
+    </div>
+
+    <div class="sb-divider"></div>
+    <div class="sb-group">
+      <a href="https://th1ngs.com" class="sb-link" target="_blank" rel="noopener">
+        <i class="bi bi-grid"></i> Try demo site
+      </a>
+      <a href="/docs/subscribe/" class="sb-link {% if page.url == '/docs/subscribe/' %}active{% endif %}">
+        <i class="bi bi-bell"></i> Subscribe
+      </a>
+      <a href="/docs/contact/" class="sb-link {% if page.url == '/docs/contact/' %}active{% endif %}">
+        <i class="bi bi-envelope"></i> Contact
+      </a>
+    </div>
+
+  </aside>
+  <div class="sidebar-overlay" id="overlay"></div>
+
+  <!-- PAGE CONTENT -->
+  {{ content | safe }}
+
+</div>
+
+<!-- Floating contact button -->
+<a href="/docs/contact/" class="fab-contact" aria-label="Contact us" title="Contact us">
+  <i class="bi bi-chat-dots"></i>
+</a>
+
+<!-- Mobile sidebar toggle -->
+<button class="mob-toggle" id="mobToggle" aria-label="Open navigation">
+  <i class="bi bi-list"></i>
+</button>
+
+<footer class="doc-footer">
+  <span>&copy; 2026 Th1ngs. All rights reserved.</span>
+  <span>
+    <a href="https://th1ngs.com">th1ngs.com</a>
+  </span>
+</footer>
+
+<script>
+(function () {
+  var sidebar  = document.getElementById('sidebar');
+  var overlay  = document.getElementById('overlay');
+  var toggle   = document.getElementById('mobToggle');
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+  }
+
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+    });
+  }
+  if (overlay) {
+    overlay.addEventListener('click', closeSidebar);
+  }
+})();
+</script>
+
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+/* lobellcom.css — Th1ngs brand / lobellcom overrides */
+
+:root {
+  --brand-primary: #4f46e5;
+  --brand-secondary: #7c3aed;
+  --brand-dark: #18181b;
+}
+
+/* Brand gradient accent */
+.brand-gradient {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Badge pill */
+.badge-pill {
+  display: inline-flex; align-items: center; gap: .3rem;
+  font-size: .72rem; font-weight: 600; padding: .2em .65em;
+  border-radius: 999px; background: var(--accent-light); color: var(--accent);
+  border: 1px solid #c7d2fe; font-family: var(--font-mono);
+}
+
+/* Version tag in nav */
+.nav-version {
+  font-size: .68rem; color: #6366f1; background: #eef2ff;
+  border: 1px solid #c7d2fe; border-radius: 999px;
+  padding: .15em .6em; font-weight: 600; font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+/* Footer */
+.doc-footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 3rem;
+  margin-left: var(--sidebar-w);
+  color: var(--muted);
+  font-size: .8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.doc-footer a { color: var(--muted); text-decoration: none; }
+.doc-footer a:hover { color: var(--accent); }
+
+@media (max-width: 768px) {
+  .doc-footer { margin-left: 0; padding: 1.5rem 1rem; }
+}
+
+/* ── Sidebar child links ── */
+.sb-link-child {
+  padding-left: 2rem !important;
+  font-size: .82rem !important;
+}
+.sb-link-child::before {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: var(--border);
+}
+
+/* ── Box Types ── */
+.bt-grid {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  margin-top: 1.5rem;
+}
+.bt-card {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color .15s, box-shadow .15s;
+}
+.bt-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(79,70,229,.08);
+  color: var(--text);
+}
+.bt-icon { font-size: 2rem; flex-shrink: 0; line-height: 1; }
+.bt-body { flex: 1; }
+.bt-name { font-weight: 700; font-size: 1rem; font-family: var(--font-head); margin-bottom: .2rem; }
+.bt-desc { font-size: .85rem; color: var(--muted); line-height: 1.5; }
+.bt-arrow { color: var(--muted); font-size: 1rem; flex-shrink: 0; transition: transform .15s; }
+.bt-card:hover .bt-arrow { transform: translateX(3px); color: var(--accent); }
+
+/* Box type hero */
+.bt-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.bt-hero-icon { font-size: 2.8rem; line-height: 1; flex-shrink: 0; margin-top: .2rem; }
+.bt-hero-label {
+  font-size: .68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .09em; color: var(--muted); margin-bottom: .3rem;
+}
+.bt-hero-title { font-family: var(--font-head); font-size: 1.8rem; font-weight: 700; margin: 0 0 .4rem; }
+.bt-hero-desc { color: var(--muted); font-size: .95rem; margin: 0; }
+
+/* Workflow state pills */
+.wf-states {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 .75rem;
+}
+.wf-state {
+  background: color-mix(in srgb, var(--sc) 12%, transparent);
+  color: var(--sc);
+  border: 1px solid color-mix(in srgb, var(--sc) 30%, transparent);
+  font-size: .8rem;
+  font-weight: 600;
+  padding: .3em .85em;
+  border-radius: 999px;
+}
+.wf-arrow { color: var(--muted); font-size: .9rem; }
+
+/* Box type prev/next nav */
+.bt-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.bt-nav-back, .bt-nav-next {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  padding: .4rem .8rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: background .15s, border-color .15s;
+}
+.bt-nav-back:hover, .bt-nav-next:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+/* ── Subscribe ── */
+.subscribe-wrap {
+  max-width: 480px;
+  margin-top: 1.5rem;
+}
+.sib-form-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+  padding: 2.5rem 1.5rem;
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+/* ── Floating contact button ── */
+.fab-contact {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 200;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(79,70,229,.35);
+  transition: background .15s, transform .15s, box-shadow .15s;
+}
+.fab-contact:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79,70,229,.45);
+  color: #fff;
+}
+
+/* ── Contact form ── */
+.contact-form {
+  max-width: 520px;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.cf-row { display: flex; flex-direction: column; gap: .35rem; }
+.cf-label {
+  font-size: .8rem; font-weight: 600; color: var(--text-2);
+}
+.cf-input {
+  font-family: var(--font); font-size: .9rem;
+  padding: .55rem .8rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  width: 100%;
+}
+.cf-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px #eef2ff;
+}
+.cf-textarea { min-height: 130px; resize: vertical; }
+.cf-submit {
+  align-self: flex-start;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font);
+  font-size: .85rem;
+  font-weight: 600;
+  padding: .55rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.cf-submit:hover { background: var(--accent-hover); }

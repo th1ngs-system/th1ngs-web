@@ -33,7 +33,7 @@ Th1ngs is built on three freedoms:
 
 ## Links
 
-- [Documentation](https://doc.th1ngs.com)
-- [API Reference](https://doc.th1ngs.com#api)
-- [MCP Guide](https://doc.th1ngs.com#mcp)
-- [Email Integration](https://doc.th1ngs.com#email)
+- [Documentation](https://th1ngs.com/docs/)
+- [API Reference](https://th1ngs.com/docs/#api)
+- [MCP Guide](https://th1ngs.com/docs/#mcp)
+- [Email Integration](https://th1ngs.com/docs/#email)

@@ -47,6 +47,12 @@ code {
 .nav-brand { display: flex; align-items: center; }
 .nav-brand img { display: block; }
 .nav-actions { display: flex; gap: .6rem; align-items: center; }
+.nav-link {
+  color: #a1a1aa; font-size: .82rem; font-weight: 500;
+  padding: .35rem .6rem;
+  transition: color .15s;
+}
+.nav-link:hover { color: #fff; }
 .nav-login {
   color: #a1a1aa; font-size: .82rem; font-weight: 500;
   padding: .35rem .8rem; border-radius: 6px;

@@ -1,0 +1,377 @@
+---
+layout: docs-base.njk
+title: Jira Cloud → Th1ngs Migration
+description: Complete guide and gap analysis for migrating from Jira Cloud to Th1ngs.
+---
+
+<main class="page-content">
+  <div class="md-content">
+
+    <h1>Jira Cloud → Th1ngs Migration</h1>
+    <p class="doc-lead" style="font-size:1.03rem; color:var(--muted); border-bottom:1px solid var(--border); padding-bottom:1.5rem; margin-bottom:2rem;">
+      Gap analysis &amp; technical requirements for a full migration of a Jira Cloud instance into Th1ngs.
+    </p>
+
+    <blockquote>
+      Scope: Full migration of a Jira Cloud instance (projects, issues, users, workflows) into a running Th1ngs deployment.
+    </blockquote>
+
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#executive-summary">Executive Summary</a></li>
+      <li><a href="#domain-model">Domain Model Mapping</a></li>
+      <li><a href="#gap-analysis">Feature Gap Analysis</a></li>
+      <li><a href="#technical-changes">Technical Changes Required</a></li>
+      <li><a href="#architecture">Import Service Architecture</a></li>
+      <li><a href="#data-transform">Data Transformation Reference</a></li>
+      <li><a href="#migration-sequence">Migration Sequence</a></li>
+      <li><a href="#risks">Risk Register</a></li>
+    </ol>
+
+    <hr>
+
+    <h2 id="executive-summary">1. Executive Summary</h2>
+    <p>Jira Cloud and Th1ngs share the same fundamental concept — a <strong>Project → Issue</strong> (Box → Thing) hierarchy with typed issues, custom fields, workflows, and user access control — but they diverge significantly in richness of relations, sprint/agile constructs, permission granularity, and API shape.</p>
+    <p>This document maps every Jira Cloud concept to its Th1ngs equivalent, identifies gaps where Th1ngs currently has no counterpart, and specifies the concrete technical changes (new entities, new REST endpoints, new YAML workflows, schema additions) that must be implemented <strong>before</strong> a migration can run successfully.</p>
+
+    <hr>
+
+    <h2 id="domain-model">2. Domain Model Mapping</h2>
+    <h3>2.1 Top-Level Concepts</h3>
+    <table>
+      <thead><tr><th>Jira Cloud Concept</th><th>Th1ngs Equivalent</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cloud Instance</strong></td><td><code>Site</code></td><td>One Jira instance maps to one Site (SIT_ID).</td></tr>
+        <tr><td><strong>Project</strong></td><td><code>Box</code></td><td>Project key → <code>BOX_KEY</code> (max 10 chars, trim if needed).</td></tr>
+        <tr><td><strong>Issue</strong></td><td><code>Thing</code></td><td>One-to-one.</td></tr>
+        <tr><td><strong>Issue Type</strong></td><td><code>ThingType</code></td><td>Map per project; share schema where types match.</td></tr>
+        <tr><td><strong>Status</strong></td><td><code>State</code></td><td>STA_NAME + STA_CATEGORY (todo/in_progress/done).</td></tr>
+        <tr><td><strong>Workflow</strong></td><td>Workflow YAML + DB row</td><td>Jira workflow → YAML file + DB entry (WFL_KEY).</td></tr>
+        <tr><td><strong>Transition</strong></td><td><code>WorkflowTransition</code></td><td>TRA_NAME, linked to workflow.</td></tr>
+        <tr><td><strong>Custom Field</strong></td><td><code>Field</code> + <code>FieldValue</code> subclass</td><td>Type mapping detailed in §6.</td></tr>
+        <tr><td><strong>Version / Fix Version</strong></td><td><code>BoxRelease</code></td><td>BRL_NAME, BRL_RELEASE_DATE per box.</td></tr>
+        <tr><td><strong>Sprint</strong></td><td><code>BoxMilestone</code></td><td>BMS_NAME, BMS_DATE per box.</td></tr>
+        <tr><td><strong>Epic</strong></td><td><code>ThingType</code> "Epic" + parent relation</td><td>Needs a <code>TRE_TYPE</code> code for "parent-of".</td></tr>
+        <tr><td><strong>User</strong></td><td><code>User</code></td><td>ACCOUNTID should store Jira accountId for traceability.</td></tr>
+        <tr><td><strong>Comment</strong></td><td><code>ThingComment</code></td><td>COM_TEXT (CLOB), COM_CREATED_DATETIME, actor.</td></tr>
+        <tr><td><strong>Attachment</strong></td><td><code>ThingAttachment</code></td><td>ATT_FILENAME with version suffix convention.</td></tr>
+        <tr><td><strong>Link</strong></td><td><code>ThingRelation</code></td><td>TRE_TYPE integer must encode Jira link types.</td></tr>
+        <tr><td><strong>Watcher</strong></td><td><em>gap — see §3</em></td><td>No native watcher entity in Th1ngs.</td></tr>
+        <tr><td><strong>Sub-task</strong></td><td><code>ThingRelation</code> (type = "subtask")</td><td>Needs reserved TRE_TYPE constant.</td></tr>
+        <tr><td><strong>Priority</strong></td><td><code>PrioritySchema</code></td><td>Entity exists; linking to Thing is a gap.</td></tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <h2 id="gap-analysis">3. Feature Gap Analysis</h2>
+    <h3>3.1 Gaps: Jira Has It, Th1ngs Does Not (Yet)</h3>
+
+    <h4>GAP-01 — Issue Link Types (Rich Semantics)</h4>
+    <table>
+      <thead><tr><th></th><th>Jira</th><th>Th1ngs</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Model</strong></td><td>Named link types (Blocks, Duplicates, Relates To, Clones, etc.) with inward/outward description</td><td><code>ThingRelation.TRE_TYPE</code> (opaque integer)</td></tr>
+        <tr><td><strong>Impact</strong></td><td colspan="2">All link type semantics are lost unless TRE_TYPE is given a known mapping — <strong>High</strong></td></tr>
+      </tbody>
+    </table>
+    <p><strong>Required change:</strong> Define a <code>ThingRelationTypeDef</code> look-up table (or an enum + DB seed) mapping integer codes to names and inward/outward labels.</p>
+
+    <h4>GAP-02 — Epic / Parent-Child Hierarchy</h4>
+    <p>Jira supports a multi-level hierarchy (Epic → Story → Sub-task) enforced by issue type configuration. Th1ngs has flat <code>ThingType</code> with no native parent concept.</p>
+    <p><strong>Required change:</strong> Add a reserved <code>ThingRelation</code> type code (e.g., <code>TRE_TYPE = 1</code> = "parent-of") and enforce one-parent constraint in <code>ThingService</code>. Alternatively, add a <code>THI_PARENT_ID</code> nullable FK column on <code>THING</code>.</p>
+
+    <h4>GAP-03 — Sprints</h4>
+    <p>Jira Sprints have: name, goal, start date, end date, state (active/closed/future), and a board association. Th1ngs has <code>BoxMilestone</code> (BMS_NAME, BMS_DATE) — single date only.</p>
+    <p><strong>Required change:</strong> Extend <code>BOX_MILESTONE</code> with <code>BMS_START_DATE</code>, <code>BMS_END_DATE</code>, <code>BMS_GOAL</code>, <code>BMS_STATE</code>. Add <code>BMS_ID</code> FK on <code>THING</code>.</p>
+
+    <h4>GAP-04 — Watchers</h4>
+    <p>Jira tracks per-issue watchers for notification purposes.</p>
+    <p><strong>Required change:</strong> New table <code>THING_WATCHER (TWA_ID, THI_ID FK, USR_ID FK, TWA_CREATED_DATETIME)</code> with unique constraint on <code>(THI_ID, USR_ID)</code>. New entity <code>ThingWatcher</code> and REST endpoints.</p>
+
+    <h4>GAP-05 — Priority Field on Thing</h4>
+    <p>Jira priority is a first-class field. Th1ngs has a <code>PrioritySchema</code> entity but no FK on <code>THING</code>.</p>
+    <p><strong>Required change:</strong> Add <code>THI_PRIORITY</code> column (varchar, nullable) on <code>THING</code> entity.</p>
+
+    <h4>GAP-06 — Resolution Field</h4>
+    <p>Jira has an explicit <code>Resolution</code> field set when an issue is closed (e.g., Fixed, Won't Fix, Duplicate, Cannot Reproduce).</p>
+    <p><strong>Required change:</strong> Add <code>THI_RESOLUTION</code> column (varchar, nullable) on <code>THING</code>. Set via workflow post-function when transitioning to a "done" category state.</p>
+
+    <h4>GAP-07 — Time Tracking / Work Log</h4>
+    <p>Jira logs <code>originalEstimate</code>, <code>remainingEstimate</code>, and individual Worklog entries. Th1ngs has a worklog box feature flag but no underlying entity.</p>
+    <p><strong>Required change:</strong> New table <code>THING_WORKLOG</code> + entity + REST endpoints.</p>
+
+    <h4>GAP-08 — Labels on Things</h4>
+    <p><code>Label</code> entity exists in Th1ngs but there is no join table linking labels to individual Things.</p>
+    <p><strong>Required change:</strong> New join table <code>THING_LABEL (THI_ID FK, LBL_ID FK)</code> + <code>@ManyToMany</code> on <code>Thing</code> entity.</p>
+
+    <hr>
+
+    <h2 id="technical-changes">4. Technical Changes Required</h2>
+
+    <h3>4.1 Database / Entity Changes</h3>
+
+    <h4>CH-01 — THING_WATCHER table</h4>
+    <pre><code>CREATE TABLE THING_WATCHER (
+    TWA_ID               BIGSERIAL PRIMARY KEY,
+    THI_ID               BIGINT NOT NULL REFERENCES THING(THI_ID) ON DELETE CASCADE,
+    USR_ID               BIGINT NOT NULL REFERENCES USERS(id) ON DELETE CASCADE,
+    TWA_CREATED_DATETIME TIMESTAMP NOT NULL DEFAULT NOW(),
+    CONSTRAINT UQ_THING_WATCHER UNIQUE (THI_ID, USR_ID)
+);</code></pre>
+
+    <h4>CH-02 — THING table extensions</h4>
+    <pre><code>ALTER TABLE THING ADD COLUMN THI_PARENT_ID               BIGINT REFERENCES THING(THI_ID);
+ALTER TABLE THING ADD COLUMN THI_PRIORITY                 VARCHAR(50);
+ALTER TABLE THING ADD COLUMN THI_RESOLUTION               VARCHAR(100);
+ALTER TABLE THING ADD COLUMN THI_ORIGINAL_ESTIMATE_SECS   INT;
+ALTER TABLE THING ADD COLUMN THI_REMAINING_ESTIMATE_SECS  INT;
+ALTER TABLE THING ADD COLUMN THI_MILESTONE_ID             BIGINT REFERENCES BOX_MILESTONE(BMS_ID);</code></pre>
+
+    <h4>CH-03 — BOX_MILESTONE table extensions</h4>
+    <pre><code>ALTER TABLE BOX_MILESTONE ADD COLUMN BMS_START_DATE TIMESTAMP;
+ALTER TABLE BOX_MILESTONE ADD COLUMN BMS_END_DATE   TIMESTAMP;
+ALTER TABLE BOX_MILESTONE ADD COLUMN BMS_GOAL       TEXT;
+ALTER TABLE BOX_MILESTONE ADD COLUMN BMS_STATE      VARCHAR(20) DEFAULT 'future';</code></pre>
+
+    <h4>CH-04 — THING_WORKLOG table</h4>
+    <pre><code>CREATE TABLE THING_WORKLOG (
+    TWL_ID               BIGSERIAL PRIMARY KEY,
+    THI_ID               BIGINT NOT NULL REFERENCES THING(THI_ID) ON DELETE CASCADE,
+    USR_ID               BIGINT NOT NULL REFERENCES USERS(id),
+    TWL_TIME_SPENT_SECS  INT NOT NULL,
+    TWL_STARTED          TIMESTAMP NOT NULL,
+    TWL_COMMENT          TEXT,
+    TWL_CREATED          TIMESTAMP NOT NULL DEFAULT NOW()
+);</code></pre>
+
+    <h4>CH-05 — THING_LABEL join table</h4>
+    <pre><code>CREATE TABLE THING_LABEL (
+    THI_ID BIGINT NOT NULL REFERENCES THING(THI_ID) ON DELETE CASCADE,
+    LBL_ID BIGINT NOT NULL REFERENCES LABEL(id) ON DELETE CASCADE,
+    PRIMARY KEY (THI_ID, LBL_ID)
+);</code></pre>
+
+    <h4>CH-06 — THING_RELATION_TYPE seed data</h4>
+    <pre><code>CREATE TABLE THING_RELATION_TYPE (
+    TRT_CODE        INT PRIMARY KEY,
+    TRT_KEY         VARCHAR(50) UNIQUE NOT NULL,
+    TRT_INWARD      VARCHAR(100),
+    TRT_OUTWARD     VARCHAR(100)
+);
+
+INSERT INTO THING_RELATION_TYPE VALUES
+    (1,  'parent-of',    'is child of',      'is parent of'),
+    (2,  'subtask',      'is subtask of',    'has subtask'),
+    (3,  'blocks',       'is blocked by',    'blocks'),
+    (4,  'duplicates',   'is duplicated by', 'duplicates'),
+    (5,  'relates-to',   'relates to',       'relates to'),
+    (6,  'clones',       'is cloned by',     'clones'),
+    (7,  'causes',       'is caused by',     'causes');</code></pre>
+
+    <h3>4.2 REST API Changes</h3>
+
+    <h4>CH-07 — Import Endpoint</h4>
+    <pre><code>POST /rest/api/1/import/jira
+  Body: JiraImportRequest {
+    jiraBaseUrl: String,
+    jiraToken:   String,
+    jiraEmail:   String,
+    projectKeys: List&lt;String&gt;,
+    targetSiteId: Long,
+    options: { importAttachments, importWorklogs, importComments, dryRun }
+  }
+  Returns: { jobId: String, status: String }
+
+GET    /rest/api/1/import/jira/{jobId}
+GET    /rest/api/1/import/jira/{jobId}/log
+DELETE /rest/api/1/import/jira/{jobId}</code></pre>
+
+    <h4>CH-08 — Watcher Endpoints</h4>
+    <pre><code>POST   /rest/api/1/thing/{id}/watch
+DELETE /rest/api/1/thing/{id}/watch
+GET    /rest/api/1/thing/{id}/watchers</code></pre>
+
+    <h4>CH-09 — Worklog Endpoints</h4>
+    <pre><code>GET    /rest/api/1/thing/{id}/worklog
+POST   /rest/api/1/thing/{id}/worklog
+PUT    /rest/api/1/thing/{id}/worklog/{wid}
+DELETE /rest/api/1/thing/{id}/worklog/{wid}</code></pre>
+
+    <h3>4.3 Workflow Changes</h3>
+
+    <h4>CH-11 — Jira-Compatible Workflow YAML</h4>
+    <pre><code>workflow:
+  key: "WF_JIRA_STANDARD"
+  name: "Jira Standard"
+  initial_status: "TO_DO"
+
+  statuses:
+    - key: "TO_DO"       name: "To Do"        category: "todo"
+    - key: "IN_PROGRESS" name: "In Progress"  category: "in_progress"
+    - key: "IN_REVIEW"   name: "In Review"    category: "in_progress"
+    - key: "DONE"        name: "Done"         category: "done"
+
+  transitions:
+    - id: "start"   name: "Start"          from: ["TO_DO"]        to: "IN_PROGRESS"
+    - id: "review"  name: "Send to Review" from: ["IN_PROGRESS"]  to: "IN_REVIEW"
+    - id: "done"    name: "Done"           from: ["*"]            to: "DONE"
+      post_functions:
+        - type: SET_FIELD
+          params: { field: "resolution", value: "Fixed" }
+    - id: "reopen"  name: "Reopen"         from: ["DONE"]         to: "TO_DO"</code></pre>
+
+    <hr>
+
+    <h2 id="architecture">5. Import Service Architecture</h2>
+    <pre><code>JiraImportController
+    │
+    ├─► validates request, creates Quartz job
+    │
+Quartz Job: JiraImportJob
+    │
+    ├─► JiraImportService
+    │       │
+    │       ├── JiraApiClient          (HTTP calls to Jira Cloud)
+    │       ├── JiraProjectMapper      (Project → Box)
+    │       ├── JiraIssueTypeMapper    (IssueType → ThingType)
+    │       ├── JiraWorkflowMapper     (Workflow → YAML + DB rows)
+    │       ├── JiraFieldMapper        (CustomField → Field + FieldValue)
+    │       ├── JiraUserMapper         (Jira User → Th1ngs User)
+    │       ├── JiraIssueMapper        (Issue → Thing + FieldValues)
+    │       ├── JiraCommentMapper      (Comment → ThingComment)
+    │       ├── JiraWorklogMapper      (Worklog → ThingWorklog)
+    │       ├── JiraAttachmentMapper   (Attachment → GCS + ThingAttachment)
+    │       ├── JiraLinkMapper         (IssueLink → ThingRelation)
+    │       ├── JiraSprintMapper       (Sprint → BoxMilestone)
+    │       └── JiraChangelogMapper    (Changelog → ThingChangeLog)
+    │
+    └─► ImportLog (persisted, queryable via GET /import/jira/{jobId}/log)</code></pre>
+
+    <hr>
+
+    <h2 id="data-transform">6. Data Transformation Reference</h2>
+
+    <h3>6.1 Custom Field Type Mapping</h3>
+    <table>
+      <thead><tr><th>Jira Field Schema Type</th><th>Th1ngs Field Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><code>string</code></td><td><code>TEXT</code> → FieldStringValue</td><td>Truncate at 100 chars; overflow to BLOB.</td></tr>
+        <tr><td><code>number</code></td><td><code>NUMBER</code> → FieldNumberValue</td><td>Double.</td></tr>
+        <tr><td><code>date</code>, <code>datetime</code></td><td><code>DATE</code> → FieldDateValue</td><td>Normalize to UTC.</td></tr>
+        <tr><td><code>array</code> (of strings/options)</td><td><code>MULTI</code> → FieldMultiValue + FieldOption</td><td>Create FieldOption rows for each value.</td></tr>
+        <tr><td><code>option</code> (single select)</td><td><code>TEXT</code> → FieldStringValue</td><td>Use option label.</td></tr>
+        <tr><td><code>user</code></td><td><code>TEXT</code> → store accountId</td><td>No native user-type field in Th1ngs.</td></tr>
+        <tr><td><code>textarea</code> / wiki markup</td><td><code>BLOB</code> → FieldBlobValue</td><td>Strip Jira Wiki markup or convert to plain text.</td></tr>
+        <tr><td><code>url</code></td><td><code>TEXT</code> → FieldStringValue</td><td></td></tr>
+        <tr><td><code>labels</code></td><td>Native THING_LABEL join (CH-05)</td><td></td></tr>
+        <tr><td><code>priority</code></td><td>Native THI_PRIORITY column (CH-02)</td><td></td></tr>
+        <tr><td><code>sprint</code></td><td>THI_MILESTONE_ID FK (CH-02)</td><td></td></tr>
+        <tr><td><code>story_points</code></td><td>NUMBER field, FLD_KEY = <code>story_points</code></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <h3>6.2 Issue Link Type Mapping</h3>
+    <table>
+      <thead><tr><th>Jira Link Type</th><th>TRE_TYPE Code</th></tr></thead>
+      <tbody>
+        <tr><td>Blocks</td><td>3</td></tr>
+        <tr><td>Duplicates</td><td>4</td></tr>
+        <tr><td>Relates to</td><td>5</td></tr>
+        <tr><td>Clones</td><td>6</td></tr>
+        <tr><td>Causes</td><td>7</td></tr>
+        <tr><td>Epic-Link (child of epic)</td><td>1 (parent-of)</td></tr>
+        <tr><td>Sub-task</td><td>2 (subtask)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>6.3 Jira Status Category Mapping</h3>
+    <table>
+      <thead><tr><th>Jira Status Category</th><th>Th1ngs State Category</th></tr></thead>
+      <tbody>
+        <tr><td><code>new</code> (To Do)</td><td><code>todo</code> (STA_CATEGORY = 1)</td></tr>
+        <tr><td><code>indeterminate</code> (In Progress)</td><td><code>in_progress</code> (STA_CATEGORY = 2)</td></tr>
+        <tr><td><code>done</code></td><td><code>done</code> (STA_CATEGORY = 3)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>6.4 User Mapping</h3>
+    <table>
+      <thead><tr><th>Jira User Field</th><th>Th1ngs Field</th></tr></thead>
+      <tbody>
+        <tr><td><code>accountId</code></td><td>ACCOUNTID (max 40 chars)</td></tr>
+        <tr><td><code>displayName</code></td><td>fullName</td></tr>
+        <tr><td><code>emailAddress</code></td><td>email</td></tr>
+        <tr><td><code>active</code></td><td>enabled</td></tr>
+      </tbody>
+    </table>
+    <p>Imported users receive a <strong>random locked password</strong> (bcrypt hash of UUID). They must reset via the Th1ngs password-reset flow or an admin sets their credentials.</p>
+
+    <h3>6.5 Rich Text / Description Conversion</h3>
+    <p>Jira Cloud uses <strong>Atlassian Document Format (ADF)</strong> for issue descriptions and comments. Th1ngs stores plain text / basic HTML.</p>
+    <p><strong>Required:</strong> Integrate a small ADF-to-HTML converter. Minimum viable: strip ADF to plain text using a recursive JSON walker.</p>
+
+    <hr>
+
+    <h2 id="migration-sequence">7. Migration Sequence</h2>
+    <p>Execute steps in this order to preserve referential integrity:</p>
+    <pre><code>1. Pre-flight checks
+   ├── Validate Jira API token (GET /rest/api/3/myself)
+   ├── Verify target Site exists in Th1ngs
+   └── Confirm all CH-01…CH-15 changes are deployed
+
+2. Seed global data
+   ├── Insert THING_RELATION_TYPE rows (CH-06)
+   └── Insert target PrioritySchema rows
+
+3. Per-project import loop
+   ├── 3a.  Import Users (idempotent by ACCOUNTID)
+   ├── 3b.  Import Groups and Group Memberships
+   ├── 3c.  Create Box (project → box, skip if BOX_KEY exists)
+   ├── 3d.  Create / reuse ThingTypeSchema for the Box
+   ├── 3e.  Create ThingTypes (issue types)
+   ├── 3f.  Generate Workflow YAML + insert Workflow + WorkflowTransition rows
+   ├── 3g.  Link WorkflowThingTypeSchema to Box
+   ├── 3h.  Create Custom Field definitions (Field rows)
+   ├── 3i.  Create BoxAccessUser/Group records (project members/roles)
+   ├── 3j.  Create BoxMilestone rows (sprints)
+   ├── 3k.  Create BoxRelease rows (fix versions)
+   ├── 3l.  Import Issues (Things) — first pass, no links
+   ├── 3m.  Import Issue Links (ThingRelation rows)
+   ├── 3n.  Import Epic/Parent relations (THI_PARENT_ID)
+   ├── 3o.  Import Comments (ThingComment)
+   ├── 3p.  Import Worklogs (ThingWorklog) if enabled
+   ├── 3q.  Import Attachments (ThingAttachment + GCS upload) if enabled
+   ├── 3r.  Import Watchers (ThingWatcher) if enabled
+   └── 3s.  Import Labels and THING_LABEL rows
+
+4. Post-import validation
+   ├── Count: Jira issues vs imported Things per project
+   ├── Verify all state values exist in workflow
+   ├── Log unresolved user references
+   └── Output import summary report</code></pre>
+
+    <hr>
+
+    <h2 id="risks">8. Risk Register</h2>
+    <table>
+      <thead><tr><th>ID</th><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>R-01</td><td>Jira API rate limits (10 req/s on Cloud free tier)</td><td>High</td><td>Medium</td><td>Implement exponential backoff + <code>Retry-After</code> header handling.</td></tr>
+        <tr><td>R-02</td><td>ADF description conversion loses formatting</td><td>High</td><td>Low</td><td>Store raw ADF JSON in a <code>FieldBlobValue</code> as fallback.</td></tr>
+        <tr><td>R-03</td><td>BOX_KEY collision (Jira project key &gt; 10 chars)</td><td>Medium</td><td>High</td><td>Truncate + append numeric suffix; log collisions for manual review.</td></tr>
+        <tr><td>R-04</td><td>User email not available (Jira privacy settings)</td><td>Medium</td><td>Medium</td><td>Use <code>accountId</code> as username; flag for admin review post-import.</td></tr>
+        <tr><td>R-05</td><td>Jira attachments exceed GCS quota</td><td>Low</td><td>High</td><td>Add <code>importAttachments: false</code> dry-run option; report total attachment size before importing.</td></tr>
+        <tr><td>R-06</td><td>Custom workflow with &gt;50 statuses</td><td>Low</td><td>Medium</td><td>YAML generation must handle large status sets; test WorkflowLoader parsing.</td></tr>
+        <tr><td>R-07</td><td>Jira issue key format (&gt;10 char project key)</td><td>Medium</td><td>Low</td><td>Store original Jira key in a <code>FieldStringValue</code> (FLD_KEY=<code>jira_issue_key</code>).</td></tr>
+        <tr><td>R-08</td><td>Data volume: &gt;100k issues</td><td>Medium</td><td>High</td><td>Paginate Jira API calls (max 100/page); batch-insert using <code>saveAll()</code> per 500 records.</td></tr>
+        <tr><td>R-09</td><td>Multi-project user overlap (same user in two projects)</td><td>High</td><td>Low</td><td>Idempotent by ACCOUNTID logic prevents duplicates.</td></tr>
+        <tr><td>R-10</td><td>Jira sub-tasks imported before parent issues</td><td>Medium</td><td>High</td><td>Import all issues first (step 3l) before resolving parent links (step 3n).</td></tr>
+      </tbody>
+    </table>
+
+    <hr>
+    <p style="color:var(--muted); font-size:.85rem;">This document should be updated as implementation progresses. Each GAP and CH item maps to a trackable development task.</p>
+
+  </div>
+</main>

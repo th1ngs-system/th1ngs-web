@@ -1,0 +1,157 @@
+---
+layout: docs-base.njk
+title: Service Desk Box Type
+description: A live-updating ITSM queue view for managing Incidents and Service Requests with per-queue filtering and auto-refresh.
+---
+
+<main class="page-content">
+  <div class="md-content">
+
+    <div class="bt-hero">
+      <span class="bt-hero-icon">🎧</span>
+      <div>
+        <div class="bt-hero-label">Box Type</div>
+        <h1 class="bt-hero-title">Service Desk</h1>
+        <p class="bt-hero-desc">A live queue view for ITSM teams. Manage Incidents and Service Requests across 8 pre-built queues with auto-refresh and per-queue column layouts.</p>
+      </div>
+    </div>
+
+    <h2>What it's for</h2>
+    <p>The <strong>Service Desk</strong> box type is designed for IT support and service management teams. It organises work into two tracked thing types — <strong>Incidents</strong> and <strong>Service Requests</strong> — and surfaces them through a set of focused queues, each showing only the columns relevant for that view.</p>
+    <p>Ideal for: IT helpdesks, internal support teams, NOC/operations centres, or any team that needs to triage and track incoming requests at a glance.</p>
+
+    <h2>Thing types</h2>
+    <table class="dtable">
+      <thead><tr><th>Type</th><th>Workflow</th><th>Use for</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Incident</strong></td>
+          <td>Simple Incident</td>
+          <td>Unplanned disruptions or service degradations that need to be restored quickly</td>
+        </tr>
+        <tr>
+          <td><strong>Service Request</strong></td>
+          <td>Simple Service Request</td>
+          <td>Standard, pre-approved requests such as access provisioning, equipment orders, or configuration changes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Workflows</h2>
+
+    <h3>Incident workflow</h3>
+    <div class="wf-states" style="flex-wrap:wrap;">
+      <div class="wf-state" style="--sc:#6366f1">New</div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-state" style="--sc:#f59e0b">In Progress</div>
+      <div class="wf-arrow">⇄</div>
+      <div class="wf-state" style="--sc:#3b82f6">Waiting for Customer</div>
+      <div class="wf-arrow">·</div>
+      <div class="wf-state" style="--sc:#3b82f6">Waiting for Support</div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-state" style="--sc:#22c55e">Resolved</div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-state" style="--sc:#6b7280">Closed</div>
+    </div>
+    <p>Incidents can move back to <strong>In Progress</strong> from any waiting state, or be re-opened from Resolved or Closed.</p>
+
+    <h3>Service Request workflow</h3>
+    <p>Service Requests follow the same state model as Incidents — New → In Progress → Waiting states → Resolved → Closed — with equivalent transitions.</p>
+
+    <h2>Queues</h2>
+    <p>The queue view auto-refreshes every <strong>8 seconds</strong>. A circular countdown timer next to the item count shows time to the next refresh. All 8 queues are always visible in the header; non-active queue counts refresh every <strong>30 seconds</strong> in the background.</p>
+
+    <table class="dtable">
+      <thead>
+        <tr>
+          <th>Queue</th>
+          <th>Filters</th>
+          <th>Visible columns</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Unassigned</strong></td>
+          <td>Any thing with no assignee</td>
+          <td>Key, Type, Summary, State, Created</td>
+        </tr>
+        <tr>
+          <td><strong>My Work</strong></td>
+          <td>Assigned to the logged-in user; excludes Resolved, Closed, and Done</td>
+          <td>Key, Type, Summary, State, Created, Updated</td>
+        </tr>
+        <tr>
+          <td><strong>INC: New</strong></td>
+          <td>Incidents in state <code>NEW</code> — not yet picked up</td>
+          <td>Key, Summary, State, Reporter, Created</td>
+        </tr>
+        <tr>
+          <td><strong>INC: Active</strong></td>
+          <td>Incidents in <code>NEW</code> or <code>IN_PROGRESS</code></td>
+          <td>Key, Summary, State, Assignee, Created, Updated</td>
+        </tr>
+        <tr>
+          <td><strong>INC: Waiting</strong></td>
+          <td>Incidents in <code>WAITING_FOR_CUSTOMER</code> or <code>WAITING_FOR_SUPPORT</code></td>
+          <td>Key, Summary, State, Assignee, Updated</td>
+        </tr>
+        <tr>
+          <td><strong>SR: Active</strong></td>
+          <td>Service Requests in <code>NEW</code> or <code>IN_PROGRESS</code></td>
+          <td>Key, Summary, State, Assignee, Created</td>
+        </tr>
+        <tr>
+          <td><strong>SR: Waiting</strong></td>
+          <td>Service Requests in <code>WAITING_FOR_CUSTOMER</code> or <code>WAITING_FOR_SUPPORT</code></td>
+          <td>Key, Summary, State, Reporter, Updated</td>
+        </tr>
+        <tr>
+          <td><strong>Resolved</strong></td>
+          <td>Any thing in <code>RESOLVED</code> state (pending closure review)</td>
+          <td>Key, Type, Summary, Assignee, Updated</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <i class="bi bi-info-circle"></i>
+      <div>
+        <strong>Key</strong> and <strong>Summary</strong> columns are always visible in every queue.
+        All other columns are toggled automatically when you switch queues.
+        The item count badge on each queue button updates in the background so you can see workload across all queues without switching.
+      </div>
+    </div>
+
+    <h2>Column reference</h2>
+    <table class="dtable">
+      <thead><tr><th>Column</th><th>Source field</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Key</strong></td><td><code>thingKey</code></td><td>Box-scoped identifier, e.g. <code>DESK-42</code>. Links to the thing detail page.</td></tr>
+        <tr><td><strong>Type</strong></td><td><code>thingTypeName</code></td><td>Incident or Service Request</td></tr>
+        <tr><td><strong>Summary</strong></td><td><code>summary</code></td><td>Short title of the item. Clickable link to the detail page.</td></tr>
+        <tr><td><strong>State</strong></td><td><code>state</code></td><td>Current workflow state, shown as a coloured badge (grey = todo, orange = in progress, blue = waiting, green = done)</td></tr>
+        <tr><td><strong>Reporter</strong></td><td><code>creatorName</code></td><td>Full name of the user who created the item</td></tr>
+        <tr><td><strong>Assignee</strong></td><td><code>assigneeName</code></td><td>Full name of the assigned team member</td></tr>
+        <tr><td><strong>Created</strong></td><td><code>created</code></td><td>Date the item was created (locale-formatted)</td></tr>
+        <tr><td><strong>Updated</strong></td><td><code>updated</code></td><td>Date and time of the last change (locale-formatted)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Error handling</h2>
+    <p>If a queue refresh fails (network error or server error), a red error message appears next to the countdown timer indicating the HTTP status code. The timer arc also turns red. The error clears automatically on the next successful refresh or when switching to another queue.</p>
+
+    <h2>Tips</h2>
+    <ul>
+      <li>Use <strong>INC: New</strong> as your first triage point — any incident not yet assigned to someone will appear here.</li>
+      <li>The <strong>Resolved</strong> queue is your daily closure review list — move resolved items to Closed once verified.</li>
+      <li><strong>My Work</strong> gives each agent a personal view of their open load without filtering manually.</li>
+      <li>Add custom fields (e.g. <em>Priority</em>, <em>Category</em>, <em>Affected Service</em>) from Box Settings → Custom Fields to capture more structured data on each item.</li>
+    </ul>
+
+    <div class="bt-nav">
+      <a href="/docs/box-types/stuff/" class="bt-nav-back"><i class="bi bi-arrow-left"></i> Stuff</a>
+      <a href="/docs/box-types/" class="bt-nav-next">All Box Types <i class="bi bi-arrow-right"></i></a>
+    </div>
+
+  </div>
+</main>
