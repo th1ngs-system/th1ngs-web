@@ -7,21 +7,53 @@ description: Manage anything that has information. Store it in typed Boxes, conn
 <main>
 
   <!-- ── HERO ── -->
-  <section class="hero">
+  <section class="hero hero-split" style="min-height:auto;">
     <div class="hero-bg"></div>
-    <div class="hero-inner">
-      <span class="badge-pill">NOW IN BETA</span>
-      <h1 class="hero-title">
-        Manage every<span class="grad-text">Th1ng</span>
-      </h1>
-      <p class="hero-sub">
-        Anything that has information belongs in Th1ngs — and if it has a workflow, even better.
-        Store your data in typed Boxes, connect Things through relationships, and keep everything organized your way.
-      </p>
-      <div class="hero-ctas">
-        <a href="#" class="btn-primary-lg" onclick="openContactModal();return false;">Get Started Free</a>
-        <a href="/docs/" class="btn-ghost-lg">
-          <i class="bi bi-book"></i> View Documentation
+    <div class="hero-split-inner">
+      <div class="hero-text">
+        <span class="badge-pill">NOW IN BETA</span>
+        <h1 class="hero-title">
+          Manage every<span class="grad-text">Th1ng</span>
+        </h1>
+        <p class="hero-sub">
+          Anything that has information belongs in Th1ngs — and if it has a workflow, even better.
+          Store your data in typed Boxes, connect Things through relationships, and keep everything organized your way.
+        </p>
+        <div class="hero-ctas">
+          <a href="/#contact" class="btn-primary-lg">Get Started Free</a>
+          <a href="/docs/" class="btn-ghost-lg">
+            <i class="bi bi-book"></i> View Documentation
+          </a>
+        </div>
+      </div>
+      <div class="hero-features">
+        <a href="/features/boxes/" class="hf-item">
+          <span class="hf-icon">📦</span>
+          <div class="hf-body">
+            <div class="hf-title">Boxes</div>
+            <div class="hf-desc">Typed containers that classify your Things.</div>
+          </div>
+        </a>
+        <a href="/features/things/" class="hf-item">
+          <span class="hf-icon">🗒️</span>
+          <div class="hf-body">
+            <div class="hf-title">Things</div>
+            <div class="hf-desc">The individual items you track — tasks, tickets, anything.</div>
+          </div>
+        </a>
+        <a href="/features/relations/" class="hf-item">
+          <span class="hf-icon">🔗</span>
+          <div class="hf-body">
+            <div class="hf-title">Relations</div>
+            <div class="hf-desc">Connect Things to each other across Boxes.</div>
+          </div>
+        </a>
+        <a href="/features/workflows/" class="hf-item">
+          <span class="hf-icon">🔄</span>
+          <div class="hf-body">
+            <div class="hf-title">Workflows</div>
+            <div class="hf-desc">Guide Things through lifecycle stages.</div>
+          </div>
         </a>
       </div>
     </div>
@@ -33,41 +65,41 @@ description: Manage anything that has information. Store it in typed Boxes, conn
       <span class="section-label">Features</span>
       <h2 class="section-title">Everything you need,<br>nothing you don't</h2>
       <div class="feat-grid">
-        <div class="feat-card">
+        <a href="/features/boxes/" class="feat-card">
           <span class="feat-icon">📦</span>
           <div class="feat-title">Boxes</div>
           <div class="feat-desc">Typed containers that classify your Things. Storing contacts is not the same as storing tasks, emails, or support requests — each Box type adapts to what you need.</div>
-        </div>
-        <div class="feat-card">
+        </a>
+        <a href="/features/things/" class="feat-card">
           <span class="feat-icon">🗒️</span>
           <div class="feat-title">Things</div>
           <div class="feat-desc">The individual items you track — tasks, tickets, contacts, assets, anything. Each Thing lives inside a Box and carries the fields and workflow that Box defines.</div>
-        </div>
-        <div class="feat-card">
+        </a>
+        <a href="/features/relations/" class="feat-card">
           <span class="feat-icon">🔗</span>
           <div class="feat-title">Relations</div>
           <div class="feat-desc">Connect Things to each other across Boxes. Link a contact to their requests, a task to its project, an asset to its location — your data, connected.</div>
-        </div>
-        <div class="feat-card">
+        </a>
+        <a href="/features/custom-fields/" class="feat-card">
           <span class="feat-icon">⚙️</span>
           <div class="feat-title">Custom Fields</div>
           <div class="feat-desc">Design the exact schema you need: text, numbers, dates, dropdowns, users, money, geo-coordinates.</div>
-        </div>
-        <div class="feat-card">
+        </a>
+        <a href="/features/workflows/" class="feat-card">
           <span class="feat-icon">🔄</span>
           <div class="feat-title">Workflows</div>
           <div class="feat-desc">YAML-defined state machines. Guide Things through lifecycle stages with conditions and validators.</div>
-        </div>
-        <div class="feat-card">
+        </a>
+        <a href="/features/plugins/" class="feat-card">
           <span class="feat-icon">🔌</span>
           <div class="feat-title">Plugins</div>
           <div class="feat-desc">Extend Th1ngs when you need more. New Box types and capabilities are continuously added — and the plugin system lets you go further.</div>
-        </div>
-        <div class="feat-card">
+        </a>
+        <a href="/features/ai-mcp/" class="feat-card">
           <span class="feat-icon">🤖</span>
           <div class="feat-title">AI / MCP</div>
           <div class="feat-desc">Connect Claude, ChatGPT or any MCP client to search and create Things via natural language.</div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
@@ -212,50 +244,35 @@ description: Manage anything that has information. Store it in typed Boxes, conn
     <div class="cta-inner">
       <h2 class="cta-title">Ready to manage every<span class="cta-grad">Th1ng</span>?</h2>
       <p class="cta-sub">Deploy on cloud or your own infrastructure. Customize everything. Extend with plugins.</p>
-      <a href="#" class="btn-cta-white" onclick="openContactModal();return false;">Start for free <i class="bi bi-arrow-right"></i></a>
+      <a href="/#contact" class="btn-cta-white">Start for free <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section class="features-section" id="contact">
+    <div class="section-inner" style="max-width:640px;">
+      <span class="section-label">Get in touch</span>
+      <h2 class="section-title">Have a question? Send us a message</h2>
+      <form class="contact-form" action="https://formspree.io/f/mqegqnrl" method="POST">
+        <div class="cf-row">
+          <label class="cf-label" for="cf-name">Name</label>
+          <input class="cf-input" type="text" id="cf-name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="cf-row">
+          <label class="cf-label" for="cf-email">Email</label>
+          <input class="cf-input" type="email" id="cf-email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="cf-row">
+          <label class="cf-label" for="cf-subject">Subject</label>
+          <input class="cf-input" type="text" id="cf-subject" name="subject" placeholder="What's this about?">
+        </div>
+        <div class="cf-row">
+          <label class="cf-label" for="cf-message">Message</label>
+          <textarea class="cf-input cf-textarea" id="cf-message" name="message" placeholder="Tell us how we can help…" required></textarea>
+        </div>
+        <button class="cf-submit" type="submit">Send message</button>
+      </form>
     </div>
   </section>
 
 </main>
-
-<!-- ── CONTACT MODAL ── -->
-<div id="contactModal" class="c-modal-overlay" aria-hidden="true" onclick="if(event.target===this)closeContactModal()">
-  <div class="c-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="contactModalLabel">
-    <div class="c-modal-header">
-      <h5 class="contact-modal-title" id="contactModalLabel">Get started with Th1ngs</h5>
-      <button class="c-modal-close" onclick="closeContactModal()" aria-label="Close">&times;</button>
-    </div>
-    <div class="c-modal-body">
-      <p class="contact-modal-sub">Leave your email and we'll reach out to set you up.</p>
-      <form action="https://formspree.io/f/mqegqnrl" method="POST" class="contact-form">
-        <div class="c-field">
-          <label for="contactEmail" class="contact-label">Your email</label>
-          <input type="email" name="email" id="contactEmail" class="contact-input" placeholder="you@example.com" required>
-        </div>
-        <div class="c-field">
-          <label for="contactMessage" class="contact-label">Message <span class="optional-hint">(optional)</span></label>
-          <textarea name="message" id="contactMessage" class="contact-input" rows="3" placeholder="Tell us what you want to manage…"></textarea>
-        </div>
-        <button type="submit" class="btn-contact-submit">Send <i class="bi bi-arrow-right"></i></button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<script>
-  function openContactModal() {
-    var m = document.getElementById('contactModal');
-    m.classList.add('is-open');
-    m.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeContactModal() {
-    var m = document.getElementById('contactModal');
-    m.classList.remove('is-open');
-    m.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeContactModal();
-  });
-</script>

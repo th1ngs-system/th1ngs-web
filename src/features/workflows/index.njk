@@ -1,0 +1,104 @@
+---
+layout: base.njk
+title: Workflows — Th1ngs
+description: YAML-defined state machines. Guide Things through lifecycle stages with conditions, validators, and post-functions.
+---
+
+<main>
+
+  <!-- ── HERO ── -->
+  <section class="hero" style="min-height:auto;">
+    <div class="hero-bg"></div>
+    <div class="hero-inner" style="max-width:720px; padding-top:8rem; padding-bottom:4rem;">
+      <span class="badge-pill">FEATURE</span>
+      <h1 class="hero-title" style="font-size:clamp(2.2rem, 5vw, 3.2rem);">Workflows</h1>
+      <p class="hero-sub">
+        YAML-defined state machines. Guide Things through lifecycle stages with conditions, validators,
+        and post-functions — without code.
+      </p>
+      <div class="hero-ctas">
+        <a href="/docs/#workflows" class="btn-ghost-lg"><i class="bi bi-book"></i> Read the docs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WORKFLOWS SPLIT ── -->
+  <section class="split-section">
+    <div class="section-inner split-inner">
+      <div class="split-text">
+        <span class="section-label">How it works</span>
+        <h2 class="split-title">Flexible, visual, enforced</h2>
+        <p class="split-desc">A workflow defines the states a Thing can be in, the transitions allowed between them, and the rules that gate those transitions.</p>
+        <ul class="split-list">
+          <li><i class="bi bi-check2-circle"></i> Visual state machine with colored status pills</li>
+          <li><i class="bi bi-check2-circle"></i> Conditions &amp; validators gate transitions</li>
+          <li><i class="bi bi-check2-circle"></i> Post-functions run automatically on transition</li>
+        </ul>
+      </div>
+      <div class="split-visual">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-dot red"></span>
+            <span class="code-dot yellow"></span>
+            <span class="code-dot green"></span>
+            <span class="code-filename">workflow.yaml</span>
+          </div>
+          <pre><span class="hk">name</span>: <span class="hs">Simple Task Workflow</span>
+<span class="hk">initial_state</span>: <span class="hs">open</span>
+<span class="hk">states</span>:
+  - <span class="hk">id</span>: <span class="hs">open</span>
+    <span class="hk">label</span>: <span class="hs">Open</span>
+    <span class="hk">color</span>: <span class="hs">"#6366f1"</span>
+  - <span class="hk">id</span>: <span class="hs">in_progress</span>
+    <span class="hk">label</span>: <span class="hs">In Progress</span>
+    <span class="hk">color</span>: <span class="hs">"#f59e0b"</span>
+  - <span class="hk">id</span>: <span class="hs">done</span>
+    <span class="hk">label</span>: <span class="hs">Done</span>
+    <span class="hk">color</span>: <span class="hs">"#22c55e"</span>
+<span class="hk">transitions</span>:
+  - <span class="hk">from</span>: <span class="hs">open</span>
+    <span class="hk">to</span>:   <span class="hs">in_progress</span>
+    <span class="hk">label</span>: <span class="hs">Start Work</span>
+  - <span class="hk">from</span>: <span class="hs">in_progress</span>
+    <span class="hk">to</span>:   <span class="hs">done</span>
+    <span class="hk">label</span>: <span class="hs">Mark Complete</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DETAILS ── -->
+  <section class="features-section">
+    <div class="section-inner">
+      <span class="section-label">Building blocks</span>
+      <h2 class="section-title">States, rules, and automation</h2>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <span class="feat-icon">🔄</span>
+          <div class="feat-title">States &amp; Transitions</div>
+          <div class="feat-desc">Define the stages a Thing moves through and exactly which moves between them are allowed.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">✅</span>
+          <div class="feat-title">Conditions &amp; Validators</div>
+          <div class="feat-desc">Gate a transition on a rule, or require a field to be set before it's allowed to proceed.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">⚡</span>
+          <div class="feat-title">Post-functions</div>
+          <div class="feat-desc">Run actions automatically the moment a transition succeeds.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2 class="cta-title">Model your process exactly</h2>
+      <p class="cta-sub">Changing a Box's workflow doesn't reset existing Things — they keep their state and follow the new rules going forward.</p>
+      <a href="/#contact" class="btn-cta-white">Get Started Free <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </section>
+
+</main>

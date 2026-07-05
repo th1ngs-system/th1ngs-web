@@ -1,0 +1,77 @@
+---
+layout: base.njk
+title: AI / MCP — Th1ngs
+description: Th1ngs ships a built-in MCP server. Connect Claude, ChatGPT, or any MCP-compatible AI to search and create Things via natural language.
+---
+
+<main>
+
+  <!-- ── HERO ── -->
+  <section class="hero" style="min-height:auto;">
+    <div class="hero-bg"></div>
+    <div class="hero-inner" style="max-width:720px; padding-top:8rem; padding-bottom:4rem;">
+      <span class="badge-pill">FEATURE</span>
+      <h1 class="hero-title" style="font-size:clamp(2.2rem, 5vw, 3.2rem);">AI / MCP</h1>
+      <p class="hero-sub">
+        Th1ngs ships a built-in MCP server. Point Claude, ChatGPT, or any MCP-compatible AI to
+        <code>/mcp/sse</code> and start managing Things by chat.
+      </p>
+      <div class="hero-ctas">
+        <a href="/docs/#mcp" class="btn-ghost-lg"><i class="bi bi-book"></i> Read the docs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DETAILS ── -->
+  <section class="features-section">
+    <div class="section-inner">
+      <span class="section-label">Available tools</span>
+      <h2 class="section-title">What your AI assistant can do</h2>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <span class="feat-icon">📋</span>
+          <div class="feat-title">list_boxes</div>
+          <div class="feat-desc">List accessible boxes with metadata and thing types.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">🔎</span>
+          <div class="feat-title">search_things</div>
+          <div class="feat-desc">Full-text search across every Thing the caller can access.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">📄</span>
+          <div class="feat-title">get_thing</div>
+          <div class="feat-desc">Fetch the full detail of a single Thing by its key.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">➕</span>
+          <div class="feat-title">create_thing</div>
+          <div class="feat-desc">Create a new Thing in a specified box (requires authentication).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRIVACY ── -->
+  <section class="split-section">
+    <div class="section-inner">
+      <span class="section-label">Privacy &amp; access control</span>
+      <h2 class="split-title" style="margin-bottom:.85rem;">Same rules as the web UI</h2>
+      <p class="split-desc" style="max-width:640px;">
+        The MCP server enforces the same access controls as everywhere else in Th1ngs. Unauthenticated
+        callers can only see public boxes. Private boxes require a valid user token — the same one
+        you'd use for the REST API.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2 class="cta-title">Manage Things by chat</h2>
+      <p class="cta-sub">Try telling your AI: "Search my Th1ngs for open bugs tagged with PROJ".</p>
+      <a href="/#contact" class="btn-cta-white">Get Started Free <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </section>
+
+</main>

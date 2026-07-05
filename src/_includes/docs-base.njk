@@ -27,19 +27,7 @@
 </head>
 <body>
 
-<!-- TOP NAV -->
-<nav class="topnav">
-  <a href="/" class="nav-brand"><img src="/img/th1ngs-logo.png" alt="Th1ngs!" height="24" style="vertical-align:middle;"></a>
-  <span class="nav-sep">/</span>
-  <span class="nav-label">Documentation</span>
-  <span class="nav-version">v1.0</span>
-  <div class="nav-actions">
-    <a href="https://th1ngs.com" class="nav-link-a" target="_blank" rel="noopener">
-      <i class="bi bi-arrow-up-right-square"></i> Try demo site
-    </a>
-    <a href="https://th1ngs.com/signup" class="nav-cta" target="_blank" rel="noopener">Get Started</a>
-  </div>
-</nav>
+{% include "nav.njk" %}
 
 <div class="layout">
 
@@ -74,18 +62,6 @@
       {% else %}
       <a href="/docs/#boxes" class="sb-link"><i class="bi bi-box"></i> Boxes</a>
       {% endif %}
-      <a href="/docs/box-types/" class="sb-link {% if '/docs/box-types/' in page.url and page.url != '/docs/box-types/mailbox/' and page.url != '/docs/box-types/stuff/' and page.url != '/docs/box-types/service-desk/' %}active{% endif %}">
-        <i class="bi bi-grid-1x2"></i> Box Types
-      </a>
-      <a href="/docs/box-types/mailbox/" class="sb-link sb-link-child {% if page.url == '/docs/box-types/mailbox/' %}active{% endif %}">
-        <i class="bi bi-envelope-at"></i> Mailbox
-      </a>
-      <a href="/docs/box-types/stuff/" class="sb-link sb-link-child {% if page.url == '/docs/box-types/stuff/' %}active{% endif %}">
-        <i class="bi bi-kanban"></i> Stuff
-      </a>
-      <a href="/docs/box-types/service-desk/" class="sb-link sb-link-child {% if page.url == '/docs/box-types/service-desk/' %}active{% endif %}">
-        <i class="bi bi-headset"></i> Service Desk
-      </a>
       {% if page.url == '/docs/' or page.url == '/docs/index.html' %}
       <button class="sb-link {% if activeSection == 'things' %}active{% endif %}" data-sec="things">
         <i class="bi bi-ui-checks-grid"></i> Things
@@ -130,7 +106,7 @@
       <a href="/docs/subscribe/" class="sb-link {% if page.url == '/docs/subscribe/' %}active{% endif %}">
         <i class="bi bi-bell"></i> Subscribe
       </a>
-      <a href="/docs/contact/" class="sb-link {% if page.url == '/docs/contact/' %}active{% endif %}">
+      <a href="/#contact" class="sb-link">
         <i class="bi bi-envelope"></i> Contact
       </a>
     </div>
@@ -144,7 +120,7 @@
 </div>
 
 <!-- Floating contact button -->
-<a href="/docs/contact/" class="fab-contact" aria-label="Contact us" title="Contact us">
+<a href="/#contact" class="fab-contact" aria-label="Contact us" title="Contact us">
   <i class="bi bi-chat-dots"></i>
 </a>
 

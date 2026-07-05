@@ -26,18 +26,7 @@
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="topnav">
-  <div class="nav-container">
-    <a href="/" class="nav-brand">
-      <img src="/img/th1ngs-logo.png" alt="Th1ngs" height="26">
-    </a>
-    <div class="nav-actions">
-      <a href="/docs/" class="nav-link">Docs</a>
-      <a href="#" class="nav-cta" onclick="openContactModal();return false;">Contact</a>
-    </div>
-  </div>
-</nav>
+{% include "nav.njk" %}
 
 {{ content | safe }}
 

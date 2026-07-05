@@ -22,14 +22,6 @@
   border: 1px solid #c7d2fe; font-family: var(--font-mono);
 }
 
-/* Version tag in nav */
-.nav-version {
-  font-size: .68rem; color: #6366f1; background: #eef2ff;
-  border: 1px solid #c7d2fe; border-radius: 999px;
-  padding: .15em .6em; font-weight: 600; font-family: var(--font-mono);
-  flex-shrink: 0;
-}
-
 /* Footer */
 .doc-footer {
   border-top: 1px solid var(--border);
@@ -48,115 +40,6 @@
 
 @media (max-width: 768px) {
   .doc-footer { margin-left: 0; padding: 1.5rem 1rem; }
-}
-
-/* ── Sidebar child links ── */
-.sb-link-child {
-  padding-left: 2rem !important;
-  font-size: .82rem !important;
-}
-.sb-link-child::before {
-  content: '';
-  display: block;
-  width: 1px;
-  height: 100%;
-  background: var(--border);
-}
-
-/* ── Box Types ── */
-.bt-grid {
-  display: flex;
-  flex-direction: column;
-  gap: .75rem;
-  margin-top: 1.5rem;
-}
-.bt-card {
-  display: flex;
-  align-items: center;
-  gap: 1.1rem;
-  padding: 1.1rem 1.25rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  text-decoration: none;
-  color: var(--text);
-  transition: border-color .15s, box-shadow .15s;
-}
-.bt-card:hover {
-  border-color: var(--accent);
-  box-shadow: 0 2px 12px rgba(79,70,229,.08);
-  color: var(--text);
-}
-.bt-icon { font-size: 2rem; flex-shrink: 0; line-height: 1; }
-.bt-body { flex: 1; }
-.bt-name { font-weight: 700; font-size: 1rem; font-family: var(--font-head); margin-bottom: .2rem; }
-.bt-desc { font-size: .85rem; color: var(--muted); line-height: 1.5; }
-.bt-arrow { color: var(--muted); font-size: 1rem; flex-shrink: 0; transition: transform .15s; }
-.bt-card:hover .bt-arrow { transform: translateX(3px); color: var(--accent); }
-
-/* Box type hero */
-.bt-hero {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.25rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border);
-}
-.bt-hero-icon { font-size: 2.8rem; line-height: 1; flex-shrink: 0; margin-top: .2rem; }
-.bt-hero-label {
-  font-size: .68rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .09em; color: var(--muted); margin-bottom: .3rem;
-}
-.bt-hero-title { font-family: var(--font-head); font-size: 1.8rem; font-weight: 700; margin: 0 0 .4rem; }
-.bt-hero-desc { color: var(--muted); font-size: .95rem; margin: 0; }
-
-/* Workflow state pills */
-.wf-states {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  flex-wrap: wrap;
-  margin: 1rem 0 .75rem;
-}
-.wf-state {
-  background: color-mix(in srgb, var(--sc) 12%, transparent);
-  color: var(--sc);
-  border: 1px solid color-mix(in srgb, var(--sc) 30%, transparent);
-  font-size: .8rem;
-  font-weight: 600;
-  padding: .3em .85em;
-  border-radius: 999px;
-}
-.wf-arrow { color: var(--muted); font-size: .9rem; }
-
-/* Box type prev/next nav */
-.bt-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.bt-nav-back, .bt-nav-next {
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  font-size: .85rem;
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: none;
-  padding: .4rem .8rem;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  transition: background .15s, border-color .15s;
-}
-.bt-nav-back:hover, .bt-nav-next:hover {
-  background: var(--accent-light);
-  border-color: var(--accent);
 }
 
 /* ── Subscribe ── */
@@ -202,46 +85,3 @@
   box-shadow: 0 6px 20px rgba(79,70,229,.45);
   color: #fff;
 }
-
-/* ── Contact form ── */
-.contact-form {
-  max-width: 520px;
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-}
-.cf-row { display: flex; flex-direction: column; gap: .35rem; }
-.cf-label {
-  font-size: .8rem; font-weight: 600; color: var(--text-2);
-}
-.cf-input {
-  font-family: var(--font); font-size: .9rem;
-  padding: .55rem .8rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--text);
-  outline: none;
-  transition: border-color .15s, box-shadow .15s;
-  width: 100%;
-}
-.cf-input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px #eef2ff;
-}
-.cf-textarea { min-height: 130px; resize: vertical; }
-.cf-submit {
-  align-self: flex-start;
-  background: var(--accent);
-  color: #fff;
-  font-family: var(--font);
-  font-size: .85rem;
-  font-weight: 600;
-  padding: .55rem 1.4rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background .15s;
-}
-.cf-submit:hover { background: var(--accent-hover); }
