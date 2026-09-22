@@ -5,7 +5,7 @@
       <img src="/img/th1ngs-logo.png" alt="Th1ngs" height="20">
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navActions">
-      <i class="bi bi-list"></i>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 5h16M2 10h16M2 15h16"/></svg>
     </button>
     <div class="nav-actions" id="navActions">
       <a href="/" class="nav-link">Product</a>
@@ -23,10 +23,13 @@
   var actions = document.getElementById('navActions');
   if (!toggle || !actions) return;
 
+  var iconMenu = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 5h16M2 10h16M2 15h16"/></svg>';
+  var iconClose = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l12 12M16 4L4 16"/></svg>';
+
   function setOpen(open) {
     actions.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    toggle.innerHTML = open ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+    toggle.innerHTML = open ? iconClose : iconMenu;
   }
 
   toggle.addEventListener('click', function () {

@@ -17,7 +17,7 @@ description: Manage anything that has information. Store it in typed Boxes, conn
         </h1>
         <p class="hero-sub">
           Anything that has information belongs in Th1ngs — and if it has a workflow, even better.
-          Store your data in typed Boxes, connect Things through relationships, and keep everything organized your way.
+          Store your data in typed boxes, connect Things through relationships, and keep everything organized your way.
         </p>
         <div class="hero-ctas">
           <a href="/#contact" class="btn-primary-lg">Get Started Free</a>
@@ -27,32 +27,148 @@ description: Manage anything that has information. Store it in typed Boxes, conn
         </div>
       </div>
       <div class="hero-features">
-        <a href="/features/boxes/" class="hf-item">
+        <a href="/boxes/" class="hf-item">
           <span class="hf-icon">📦</span>
           <div class="hf-body">
             <div class="hf-title">Boxes</div>
-            <div class="hf-desc">Typed containers that classify your Things.</div>
+            <div class="hf-desc">A box represents the <b>main container</b> for your warehouse.
+            In addition, the following are controlled here:
+                <ul>
+                  <li><b>type</b>: When they are of a predefined type, the set of things to be added is fixed.</li>
+                  <li><b>security</b>: Who will be able to open this box, and visibility</li>
+                  <li><b>features</b>: e.g., does it accept attachments? work logs?</li>
+                  </div>
+                </ul>
           </div>
         </a>
-        <a href="/features/things/" class="hf-item">
+        <a href="/things/" class="hf-item">
           <span class="hf-icon">🗒️</span>
           <div class="hf-body">
             <div class="hf-title">Things</div>
-            <div class="hf-desc">The individual items you track — tasks, tickets, anything.</div>
+            <div class="hf-desc">
+            Things: these are the basic elements. Versatile, customizable, and powerful!
+                <ul>
+                    <li><b>type</b>defines the category and base behavior of the thing.</li>
+                    <li><b>workflow</b>: sets the stages and rules of its lifecycle.</li>
+                    <li><b>custom field</b>: allows storing specific, individualized information.</li>
+                </ul>
+            </div>
           </div>
         </a>
-        <a href="/features/relations/" class="hf-item">
-          <span class="hf-icon">🔗</span>
-          <div class="hf-body">
-            <div class="hf-title">Relations</div>
-            <div class="hf-desc">Connect Things to each other across Boxes.</div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BOX TYPES ── -->
+  <section class="hierarchy-section">
+    <div class="section-inner" style="padding-top:2rem;">
+      <span class="section-label">Box Types</span>
+      <h2 class="section-title">A Box Type for every kind of work</h2>
+      <p class="integrations-desc" style="max-width:none;">Every Box starts from a Box Type — a template that pre-configures the schema, workflow, and views for exactly what you're tracking. Pick one to get moving in seconds, or start from Core and build your own.</p>
+      <div class="feat-grid">
+        <a href="/boxes/service-management/" class="feat-card">
+          <span class="feat-icon"><i class="bi bi-headset"></i></span>
+          <div class="feat-title">Service Management</div>
+          <div class="feat-desc">IT service management and helpdesk. Handle incidents, service requests and changes in a systematic way.</div>
+        </a>
+        <a href="/boxes/agile-software-development/" class="feat-card">
+          <span class="feat-icon"><i class="bi bi-bug"></i></span>
+          <div class="feat-title">Agile Software Development</div>
+          <div class="feat-desc">Agile board for software teams. Track bugs, features and sprints with developer-friendly workflows and a built-in backlog.</div>
+          <div class="bx-tags">
+            <span class="bx-tag">Kanban</span>
+            <span class="bx-tag">Backlog</span>
+            <span class="bx-tag">List</span>
           </div>
         </a>
-        <a href="/features/workflows/" class="hf-item">
-          <span class="hf-icon">🔄</span>
-          <div class="hf-body">
-            <div class="hf-title">Workflows</div>
-            <div class="hf-desc">Guide Things through lifecycle stages.</div>
+        <a href="/boxes/project-management/" class="feat-card">
+          <span class="feat-icon"><i class="bi bi-kanban"></i></span>
+          <div class="feat-title">Project Management</div>
+          <div class="feat-desc">Plan and track projects with milestones, tasks and timelines.</div>
+          <div class="bx-tags">
+            <span class="bx-tag">Kanban</span>
+            <span class="bx-tag">Calendar</span>
+            <span class="bx-tag">Timeline</span>
+            <span class="bx-tag">Project Status</span>
+            <span class="bx-tag">List</span>
+          </div>
+        </a>
+        <a href="/boxes/waterfall-software-management/" class="feat-card">
+          <span class="feat-icon"><i class="bi bi-code-slash"></i></span>
+          <div class="feat-title">Waterfall Software Management</div>
+          <div class="feat-desc">Track new features, improvements, bugs, tasks and subtasks.</div>
+          <div class="bx-tags">
+            <span class="bx-tag">Kanban</span>
+            <span class="bx-tag">Timeline</span>
+            <span class="bx-tag">Calendar</span>
+            <span class="bx-tag">List</span>
+          </div>
+        </a>
+        <a href="/boxes/mailbox/" class="feat-card">
+          <span class="feat-icon"><i class="bi bi-mailbox"></i></span>
+          <div class="feat-title">Mailbox</div>
+          <div class="feat-desc">Process incoming emails as things. Connects to your email account via IMAP and creates items automatically.</div>
+          <div class="bx-tags">
+            <span class="bx-tag">Mailbox</span>
+            <span class="bx-tag">List</span>
+          </div>
+        </a>
+        <a href="/boxes/th1ngs-ware/" class="feat-card">
+          <span class="feat-icon"><i class="bi bi-inbox"></i></span>
+          <div class="feat-title">Th1ngs-ware</div>
+          <div class="feat-desc">Manage things with simple open and closed statuses. Only the essential fields, with a Kanban view.</div>
+          <div class="bx-tags">
+            <span class="bx-tag">Th1ngs-ware</span>
+          </div>
+        </a>
+        <a href="/boxes/core/" class="feat-card">
+          <span class="feat-icon"><i class="bi bi-check2-square"></i></span>
+          <div class="feat-title">Core</div>
+          <div class="feat-desc">Box for simple task management.</div>
+          <div class="bx-tags">
+            <span class="bx-tag">Basic</span>
+          </div>
+        </a>
+        <a href="/boxes/cards/" class="feat-card">
+          <span class="feat-icon"><i class="bi bi-grid-3x3-gap"></i></span>
+          <div class="feat-title">Cards</div>
+          <div class="feat-desc">Visual card board. Each thing is shown as a compact card with configurable field display.</div>
+          <div class="bx-tags">
+            <span class="bx-tag">Cards</span>
+          </div>
+        </a>
+        <a href="/boxes/places/" class="feat-card">
+          <span class="feat-icon"><i class="bi bi-geo-alt"></i></span>
+          <div class="feat-title">Places</div>
+          <div class="feat-desc">Manage locations, venues and geographic points of interest.</div>
+          <div class="bx-tags">
+            <span class="bx-tag">Places</span>
+            <span class="bx-tag">Guide</span>
+          </div>
+        </a>
+        <a href="/boxes/photo/" class="feat-card">
+          <span class="feat-icon"><i class="bi bi-camera"></i></span>
+          <div class="feat-title">Photo</div>
+          <div class="feat-desc">Organize and manage photo albums and media collections.</div>
+          <div class="bx-tags">
+            <span class="bx-tag">Photo</span>
+          </div>
+        </a>
+        <a href="/boxes/wiki/" class="feat-card">
+          <span class="feat-icon"><i class="bi bi-journal-text"></i></span>
+          <div class="feat-title">Wiki</div>
+          <div class="feat-desc">Manage wiki pages and structured documentation.</div>
+          <div class="bx-tags">
+            <span class="bx-tag">Wiki</span>
+          </div>
+        </a>
+        <a href="/boxes/custom/" class="feat-card" style="border-style:dashed; border-color:var(--accent);">
+          <span class="feat-icon"><i class="bi bi-stars"></i></span>
+          <div class="feat-title">Custom</div>
+          <div class="feat-desc">Don't see the fit you need? Start from a blank Box and define your own schema, workflow, and views.</div>
+          <div class="bx-tags">
+            <span class="bx-tag">Build your own</span>
           </div>
         </a>
       </div>
@@ -65,40 +181,35 @@ description: Manage anything that has information. Store it in typed Boxes, conn
       <span class="section-label">Features</span>
       <h2 class="section-title">Everything you need,<br>nothing you don't</h2>
       <div class="feat-grid">
-        <a href="/features/boxes/" class="feat-card">
-          <span class="feat-icon">📦</span>
-          <div class="feat-title">Boxes</div>
-          <div class="feat-desc">Typed containers that classify your Things. Storing contacts is not the same as storing tasks, emails, or support requests — each Box type adapts to what you need.</div>
-        </a>
-        <a href="/features/things/" class="feat-card">
-          <span class="feat-icon">🗒️</span>
-          <div class="feat-title">Things</div>
-          <div class="feat-desc">The individual items you track — tasks, tickets, contacts, assets, anything. Each Thing lives inside a Box and carries the fields and workflow that Box defines.</div>
-        </a>
-        <a href="/features/relations/" class="feat-card">
-          <span class="feat-icon">🔗</span>
-          <div class="feat-title">Relations</div>
-          <div class="feat-desc">Connect Things to each other across Boxes. Link a contact to their requests, a task to its project, an asset to its location — your data, connected.</div>
-        </a>
-        <a href="/features/custom-fields/" class="feat-card">
-          <span class="feat-icon">⚙️</span>
-          <div class="feat-title">Custom Fields</div>
-          <div class="feat-desc">Design the exact schema you need: text, numbers, dates, dropdowns, users, money, geo-coordinates.</div>
-        </a>
         <a href="/features/workflows/" class="feat-card">
           <span class="feat-icon">🔄</span>
           <div class="feat-title">Workflows</div>
-          <div class="feat-desc">YAML-defined state machines. Guide Things through lifecycle stages with conditions and validators.</div>
+          <div class="feat-desc">Enable workflow state machine for things</div>
         </a>
-        <a href="/features/plugins/" class="feat-card">
-          <span class="feat-icon">🔌</span>
-          <div class="feat-title">Plugins</div>
-          <div class="feat-desc">Extend Th1ngs when you need more. New Box types and capabilities are continuously added — and the plugin system lets you go further.</div>
+        <a href="/features/worklog/" class="feat-card">
+          <span class="feat-icon">⏱️</span>
+          <div class="feat-title">Worklog</div>
+          <div class="feat-desc">Enable time tracking and work logging</div>
+        </a>
+        <a href="/features/milestones/" class="feat-card">
+          <span class="feat-icon">🏁</span>
+          <div class="feat-title">Milestones</div>
+          <div class="feat-desc">Enable milestone tracking and planning</div>
+        </a>
+        <a href="/features/attachments/" class="feat-card">
+          <span class="feat-icon">📎</span>
+          <div class="feat-title">Attachments</div>
+          <div class="feat-desc">Enable file attachments on things</div>
         </a>
         <a href="/features/ai-mcp/" class="feat-card">
           <span class="feat-icon">🤖</span>
-          <div class="feat-title">AI / MCP</div>
-          <div class="feat-desc">Connect Claude, ChatGPT or any MCP client to search and create Things via natural language.</div>
+          <div class="feat-title">AI</div>
+          <div class="feat-desc">Enable AI-powered features</div>
+        </a>
+        <a href="/features/wiki/" class="feat-card">
+          <span class="feat-icon">📖</span>
+          <div class="feat-title">Wiki</div>
+          <div class="feat-desc">Enable wiki pages with parent/child navigation</div>
         </a>
       </div>
     </div>
@@ -182,6 +293,45 @@ description: Manage anything that has information. Store it in typed Boxes, conn
     </div>
   </section>
 
+  <!-- ── INFRASTRUCTURE AS CODE ── -->
+  <section class="split-section">
+    <div class="section-inner split-inner" style="flex-direction: row-reverse;">
+      <div class="split-text">
+        <span class="section-label">Infrastructure as Code</span>
+        <h2 class="split-title">Configuration lives in files, not clicks</h2>
+        <p class="split-desc">Th1ngs is built around an Infrastructure-as-Code model. Every Box, workflow, and field definition is stored in files you can version — forget manual changes between environments.</p>
+        <ul class="split-list">
+          <li><i class="bi bi-check2-circle"></i> Boxes, workflows and fields defined as versionable config</li>
+          <li><i class="bi bi-check2-circle"></i> Promote the same file across environments, never repeat a click</li>
+          <li><i class="bi bi-check2-circle"></i> Full history and review for every configuration change</li>
+        </ul>
+      </div>
+      <div class="split-visual">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-dot red"></span>
+            <span class="code-dot yellow"></span>
+            <span class="code-dot green"></span>
+            <span class="code-filename">box.yaml</span>
+          </div>
+          <pre><span class="hk">name</span>: <span class="hs">Support Tickets</span>
+<span class="hk">key</span>: <span class="hs">SUP</span>
+<span class="hk">type</span>: <span class="hs">service-management</span>
+<span class="hk">security</span>:
+  <span class="hk">visibility</span>: <span class="hs">private</span>
+  <span class="hk">roles</span>:
+    - <span class="hk">role</span>: <span class="hs">admin</span>
+      <span class="hk">users</span>: [<span class="hs">alice</span>]
+    - <span class="hk">role</span>: <span class="hs">editor</span>
+      <span class="hk">users</span>: [<span class="hs">support-team</span>]
+<span class="hk">features</span>:
+  <span class="hk">attachments</span>: <span class="hs">true</span>
+  <span class="hk">comments</span>: <span class="hs">true</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── INTEGRATIONS ── -->
   <section class="integrations-section">
     <div class="section-inner">
@@ -206,6 +356,37 @@ description: Manage anything that has information. Store it in typed Boxes, conn
           <div class="int-title">Email</div>
           <div class="int-desc">Connect an IMAP mailbox to a Box. Incoming emails create new Things; reply threads automatically append as comments. Attachments included.</div>
           <a href="/docs/#email" class="int-link">Set up email <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MULTIPLE INTERFACES ── -->
+  <section class="integrations-section">
+    <div class="section-inner">
+      <span class="section-label">Multiple interfaces</span>
+      <h2 class="section-title">Work with Th1ngs your way</h2>
+      <p class="integrations-desc">The same data and the same permissions, reachable however fits your workflow — from a browser, a script, a terminal, or your device fleet.</p>
+      <div class="int-grid iface-grid">
+        <div class="int-card">
+          <i class="bi bi-window int-icon"></i>
+          <div class="int-title">Web</div>
+          <div class="int-desc">The full-featured web app — no separate client to install, and of course, always available.</div>
+        </div>
+        <div class="int-card">
+          <i class="bi bi-braces int-icon"></i>
+          <div class="int-title">REST API</div>
+          <div class="int-desc">The same JSON REST API that powers the web app, open for any client you want to build on.</div>
+        </div>
+        <div class="int-card">
+          <i class="bi bi-terminal int-icon"></i>
+          <div class="int-title">Shell</div>
+          <div class="int-desc">A scriptable command-line client for automation, CI pipelines, and Infrastructure-as-Code workflows.</div>
+        </div>
+        <div class="int-card">
+          <i class="bi bi-phone int-icon"></i>
+          <div class="int-title">MDM</div>
+          <div class="int-desc">Provision and manage Th1ngs across your device fleet directly from your Mobile Device Management platform.</div>
         </div>
       </div>
     </div>

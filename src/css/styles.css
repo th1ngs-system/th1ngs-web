@@ -363,6 +363,8 @@ code {
 .int-link:hover { gap: .6rem; }
 .int-link i { font-size: .75rem; }
 
+.iface-grid { grid-template-columns: repeat(4, 1fr); }
+
 /* ── Hierarchy ── */
 .hierarchy-section { background: var(--surface); }
 .hier-inner { text-align: center; }
@@ -516,6 +518,7 @@ code {
 /* ── Mobile ── */
 @media (max-width: 900px) {
   .int-grid { grid-template-columns: 1fr; }
+  .iface-grid { grid-template-columns: repeat(2, 1fr); }
   .split-inner { flex-direction: column; gap: 2.5rem; }
   .split-visual { width: 100%; }
   .hero-split-inner { grid-template-columns: 1fr; gap: 2.25rem; padding-top: calc(var(--nav-h) + 2.5rem); }
@@ -546,6 +549,7 @@ code {
   .steps-strip { flex-direction: column; gap: 1.5rem; }
   .step-connector { display: none; }
   .hier-visual { flex-direction: column; gap: .75rem; max-width: 220px; }
+  .iface-grid { grid-template-columns: 1fr; }
   .hier-arrow { transform: rotate(90deg); }
   .cta-title { font-size: 1.85rem; }
   .hero-ctas { flex-direction: column; align-items: center; }
