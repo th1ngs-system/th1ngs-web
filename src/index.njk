@@ -20,7 +20,10 @@ description: Manage anything that has information. Store it in typed Boxes, conn
           Store your data in typed boxes, connect Things through relationships, and keep everything organized your way.
         </p>
         <div class="hero-ctas">
-          <a href="/#contact" class="btn-primary-lg">Get Started Free</a>
+          <a href="https://demo.th1ngs.com" target="_blank" rel="noopener" class="btn-demo-lg">
+            <i class="bi bi-play-circle-fill"></i> Try it Online
+          </a>
+          <a href="/#contact" class="btn-primary-lg">Contact us!</a>
           <a href="/docs/" class="btn-ghost-lg">
             <i class="bi bi-book"></i> View Documentation
           </a>
@@ -171,6 +174,52 @@ description: Manage anything that has information. Store it in typed Boxes, conn
             <span class="bx-tag">Build your own</span>
           </div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FLOW ── -->
+  <section class="split-section">
+    <div class="section-inner split-inner">
+      <div class="split-text">
+        <span class="section-label">Architecture</span>
+        <h2 class="split-title">Every product is an entity with a flow</h2>
+        <p class="split-desc">Static data and background logic aren't really separate — they're two halves of the same object. Th1ngs is built around that idea: every Box is an entity holding state and context, every workflow is its flow, and every integration is a multi-channel dispatch point.</p>
+        <ul class="split-list">
+          <li><i class="bi bi-check2-circle"></i> Entities hold state, attributes and history</li>
+          <li><i class="bi bi-check2-circle"></i> Flows govern how they move between states</li>
+          <li><i class="bi bi-check2-circle"></i> One abstraction, reachable from AI, API, web and automation</li>
+        </ul>
+        <a href="/dms/" class="btn-ghost-lg"><i class="bi bi-diagram-3"></i> Read the full breakdown</a>
+      </div>
+      <div class="split-visual">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-dot red"></span>
+            <span class="code-dot yellow"></span>
+            <span class="code-dot green"></span>
+            <span class="code-filename">flow.txt</span>
+          </div>
+          <pre>    [ External Trigger / Input ]
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│              <span class="hk">ENTITY</span>             │
+│  (Data, Configuration, Context) │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│               <span class="hk">FLOW</span>              │
+│   (Logic, Rules, Transitions)   │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│      <span class="hk">MULTI-CHANNEL DISPATCH</span>     │
+│   (AI MCP, n8n, REST API, Web)  │
+└─────────────────────────────────┘</pre>
+        </div>
       </div>
     </div>
   </section>
