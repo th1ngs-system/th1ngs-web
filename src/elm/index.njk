@@ -1,7 +1,7 @@
 ---
 layout: base.njk
-title: DMS — Data Management Systems — Th1ngs
-description: What a DMS (Data Management System) is, and why every product is an entity with a flow — Th1ngs is the unified orchestration platform for entities and their lifecycle flows, reachable from AI, REST, n8n, web and mobile.
+title: ELM — Entity Lifecycle Management — Th1ngs
+description: Introducing ELM — Entity Lifecycle Management. ELM stores your data together with the flow that governs it, so state, history, and transitions live in one place. Th1ngs is the Entity Lifecycle Management platform for entities and their lifecycle flows, reachable from AI, REST, n8n, web and mobile.
 ---
 
 <main>
@@ -11,34 +11,75 @@ description: What a DMS (Data Management System) is, and why every product is an
     <div class="hero-bg"></div>
     <div class="hero-inner" style="max-width:780px; padding-top:8rem; padding-bottom:3rem;">
       <span class="badge-pill">ARCHITECTURE</span>
-      <h1 class="hero-title" style="font-size:clamp(2.1rem, 4.5vw, 3rem);">Rethinking Digital Architecture: Why Every Product is an Entity with a Flow</h1>
+      <h1 class="hero-title" style="font-size:clamp(2.1rem, 4.5vw, 3rem);">Introducing ELM: Entity Lifecycle Management</h1>
       <p class="hero-sub">
-        The distinction between a static product, a background service, and an operational workflow
-        is rapidly disappearing. Modern scalable architecture demands a unified paradigm: every
-        product type is fundamentally an entity with an underlying flow.
+        Every order, application, device, and subscription has a lifecycle. ELM is a new category
+        of software that stores your data together with the flow that governs it, so state,
+        history, and transitions live in one place.
       </p>
       <div class="hero-ctas">
-        <a href="https://demo.th1ngs.com" target="_blank" rel="noopener" class="btn-demo-lg"><i class="bi bi-play-circle-fill"></i> Try it Online</a>
+        <a href="https://demo.th1ngs.net" target="_blank" rel="noopener" class="btn-demo-lg"><i class="bi bi-play-circle-fill"></i> Try it Online</a>
         <a href="/#contact" class="btn-primary-lg">Contact us!</a>
         <a href="/docs/" class="btn-ghost-lg"><i class="bi bi-book"></i> View Documentation</a>
       </div>
     </div>
   </section>
 
-  <!-- ── DEFINITION: DMS ── -->
+  <!-- ── OVERVIEW + DEFINITION ── -->
   <section class="features-section">
     <div class="section-inner" style="max-width:760px;">
-      <div class="feat-card" style="padding:2rem 2.25rem; cursor:default;">
-        <span class="feat-icon"><i class="bi bi-database"></i></span>
-        <div class="feat-title" style="font-size:1.1rem; margin-bottom:.6rem;">What is a DMS?</div>
-        <div class="feat-desc" style="font-size:.92rem;">
-          <strong>DMS</strong> stands for <strong>Data Management System</strong> — the layer of a
-          platform responsible for storing, organizing, securing, and governing an organization's
-          data throughout its lifecycle, so applications and people can reliably create, read,
-          update, and retrieve it. In Th1ngs, the DMS is the entity side of the entity-plus-flow
-          model described below: it holds the structured data, configuration, and history that
-          every Box and Thing is built on, while Flows govern how that data moves and changes
-          over time.
+      <span class="section-label">Overview</span>
+      <h2 class="section-title">A new category of software</h2>
+      <p class="integrations-desc" style="max-width:none;">
+        In modern software design, system engineering, and digital product strategy, the distinction
+        between a static product, a background service, and an operational workflow is rapidly
+        disappearing. Traditional development models treat database records as passive data and
+        backend pipelines as separate execution scripts. Modern scalable architecture demands a
+        unified paradigm: every product type is fundamentally an entity with a lifecycle.
+      </p>
+      <p class="integrations-desc" style="max-width:none;">
+        Whether you're building an e-commerce order engine, a fintech onboarding pipeline, an IoT
+        telemetry stream, or an AI-driven automation hub, your domain components don't exist in
+        isolation. They are stateful, event-driven objects that live, react, mutate, and evolve
+        through structured states over time. Managing them well deserves its own category of software.
+      </p>
+      <div class="feat-card" style="cursor:default; border-left:3px solid var(--accent); border-radius:4px;">
+        <div class="feat-desc" style="font-size:.95rem; color:var(--text-2);">
+          <strong style="color:var(--text);">Entity Lifecycle Management (ELM)</strong> is software
+          that stores data together with the flow that governs it. It manages any business entity
+          from creation to completion — its attributes, its current state, the rules that move it
+          forward, and the full history of how it got there.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT MAKES ELM DIFFERENT ── -->
+  <section class="features-section" style="background:var(--surface);">
+    <div class="section-inner">
+      <span class="section-label">Category</span>
+      <h2 class="section-title">A domain-agnostic category</h2>
+      <p class="integrations-desc" style="max-width:none;">
+        Most platforms ship with a fixed model of what they manage — a fixed idea of what the
+        thing they're tracking looks like. ELM takes a different approach: it applies the same
+        lifecycle thinking to <em>any</em> entity in a digital system, without assuming what that
+        entity is.
+      </p>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <span class="feat-icon"><i class="bi bi-sliders"></i></span>
+          <div class="feat-title">Domain-agnostic</div>
+          <div class="feat-desc">You define the entity and its flow. The platform takes care of state, persistence, triggers, and integrations — no fixed model of what you're managing.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon"><i class="bi bi-link-45deg"></i></span>
+          <div class="feat-title">Flow-coupled by design</div>
+          <div class="feat-desc">State, history, and transition rules live with the data itself — not in a separate pipeline of scripts and cron jobs.</div>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon"><i class="bi bi-bullseye"></i></span>
+          <div class="feat-title">One source of truth</div>
+          <div class="feat-desc">Every channel — web, API, AI, automation — reads from and acts on the same lifecycle state, so nothing drifts out of sync.</div>
         </div>
       </div>
     </div>
@@ -47,15 +88,11 @@ description: What a DMS (Data Management System) is, and why every product is an
   <!-- ── PART 1: FOUNDATIONS ── -->
   <section class="features-section">
     <div class="section-inner">
-      <span class="section-label">Part 1 — Conceptual Foundations</span>
-      <h2 class="section-title">Two pillars of a flow-based entity</h2>
+      <span class="section-label">Part 1 — Conceptual Foundations of ELM</span>
+      <h2 class="section-title">The two pillars of ELM</h2>
       <p class="integrations-desc" style="max-width:none;">
-        Whether you're building an e-commerce order engine, a fintech onboarding pipeline, an IoT
-        telemetry stream, or an AI-driven automation hub, your domain components don't exist in
-        isolation. They are stateful, event-driven objects that live, react, mutate, and evolve
-        through structured states over time. To design scalable platforms, software architects
-        must bridge the gap between static domain models and asynchronous business logic by
-        breaking them into two main pillars:
+        To design scalable platforms, software architects must bridge the gap between static
+        domain models and asynchronous business logic. ELM unifies these through two pillars:
       </p>
       <div class="feat-grid" style="grid-template-columns: repeat(2, 1fr);">
         <div class="feat-card">
@@ -70,9 +107,9 @@ description: What a DMS (Data Management System) is, and why every product is an
         </div>
       </div>
       <p class="integrations-desc" style="max-width:none; margin-top:2rem;">
-        When entities and flows are coupled into a singular, standardized abstraction, systems
-        become inherently predictable, audit-ready, and modular. Developers no longer need to
-        write fragmented glue code across multiple services to track an item's status — state
+        When entities and flows are coupled into a single, standardized abstraction, systems
+        become inherently predictable, audit-ready, and modular. Developers no longer write
+        fragmented glue code across multiple services to track an item's status — lifecycle
         management is built directly into the object's definition.
       </p>
     </div>
@@ -115,13 +152,13 @@ description: What a DMS (Data Management System) is, and why every product is an
   <section class="features-section">
     <div class="section-inner">
       <span class="section-label">The problem</span>
-      <h2 class="section-title">The pitfalls of traditional architecture</h2>
-      <p class="integrations-desc" style="max-width:none;">Legacy software models frequently separate data storage from execution logic, giving rise to several systemic problems:</p>
+      <h2 class="section-title">Why traditional architecture falls short</h2>
+      <p class="integrations-desc" style="max-width:none;">Without an ELM layer, legacy software separates data storage from execution logic, which gives rise to several systemic problems:</p>
       <div class="feat-grid">
         <div class="feat-card">
           <span class="feat-icon"><i class="bi bi-shuffle"></i></span>
           <div class="feat-title">Fragmented state engines</div>
-          <div class="feat-desc">Custom scripts scattered across cron jobs, cloud functions, and database triggers make it difficult to determine the authoritative state of a product.</div>
+          <div class="feat-desc">Custom scripts scattered across cron jobs, cloud functions, and database triggers make it difficult to determine the authoritative state of an entity.</div>
         </div>
         <div class="feat-card">
           <span class="feat-icon"><i class="bi bi-bricks"></i></span>
@@ -142,8 +179,8 @@ description: What a DMS (Data Management System) is, and why every product is an
     <div class="section-inner split-inner">
       <div class="split-text">
         <span class="section-label">Part 2 — Enter Th1ngs</span>
-        <h2 class="split-title">The unified entity orchestration platform</h2>
-        <p class="split-desc">Th1ngs is an enterprise-grade management platform built specifically to resolve these architectural challenges. It serves as the foundational operating layer for defining, orchestrating, and scaling entities alongside their lifecycle flows.</p>
+        <h2 class="split-title">Th1ngs, the ELM platform</h2>
+        <p class="split-desc">Th1ngs is an enterprise-grade Entity Lifecycle Management platform built to resolve these architectural challenges. It serves as the foundational operating layer for defining, orchestrating, and scaling entities alongside their lifecycle flows.</p>
         <p class="split-desc">By handling background execution, state persistence, and event triggers natively, Th1ngs lets teams focus entirely on product logic rather than boilerplate cloud infrastructure.</p>
         <ul class="split-list">
           <li><i class="bi bi-check2-circle"></i> Zero infrastructure overhead — core infrastructure management is completely free</li>
@@ -178,17 +215,17 @@ description: What a DMS (Data Management System) is, and why every product is an
     <div class="section-inner">
       <span class="section-label">Part 3 — Integration Ecosystem</span>
       <h2 class="section-title">Comprehensive multi-channel integration</h2>
-      <p class="integrations-desc">Managing stateful entities requires communication across diverse client interfaces, AI models, and automation tools. Th1ngs bridges these environments out of the box with native support for key protocols and integration standards.</p>
+      <p class="integrations-desc">An entity's lifecycle touches many systems. A complete ELM platform must communicate across client interfaces, AI models, and automation tools. Th1ngs bridges these environments out of the box with native support for key protocols and integration standards.</p>
       <div class="int-grid">
         <div class="int-card">
           <i class="bi bi-cpu int-icon"></i>
           <div class="int-title">AI Model Context Protocol (MCP)</div>
-          <div class="int-desc">AI agents evaluate an entity's current state, run predictive analysis, and execute state transitions autonomously — with real-time, structured domain knowledge and no manual context construction.</div>
+          <div class="int-desc">AI agents evaluate an entity's current lifecycle state, run predictive analysis, and execute state transitions autonomously — with real-time, structured domain knowledge and no manual context construction.</div>
         </div>
         <div class="int-card">
           <i class="bi bi-diagram-2 int-icon"></i>
           <div class="int-title">Native n8n workflow automation</div>
-          <div class="int-desc">Trigger n8n visual workflows directly from entity state changes, syncing with CRMs, payment gateways, Slack/Email, and databases without custom backend code.</div>
+          <div class="int-desc">Trigger n8n visual workflows directly from entity state changes, automatically syncing lifecycle changes with payment gateways, communication tools (Slack/Email), and databases without custom backend code.</div>
         </div>
         <div class="int-card">
           <i class="bi bi-braces int-icon"></i>
@@ -198,12 +235,12 @@ description: What a DMS (Data Management System) is, and why every product is an
         <div class="int-card">
           <i class="bi bi-phone int-icon"></i>
           <div class="int-title">Real-time WebApps &amp; mobile SDKs</div>
-          <div class="int-desc">Bi-directional state sync over WebSocket and server-sent events, keeping iOS, Android, and web UIs consistent with every flow change instantly.</div>
+          <div class="int-desc">Bi-directional state sync over WebSocket and server-sent events, keeping iOS, Android, and web UIs consistent with every lifecycle change instantly.</div>
         </div>
         <div class="int-card">
           <i class="bi bi-puzzle int-icon"></i>
           <div class="int-title">Modular, extensible ecosystem</div>
-          <div class="int-desc">Custom protocol adapters, edge computing nodes, and emerging standards keep your platform future-proof as tech stacks advance.</div>
+          <div class="int-desc">Custom protocol adapters, edge computing nodes, and emerging standards keep your ELM foundation future-proof as tech stacks advance.</div>
         </div>
       </div>
     </div>
@@ -212,16 +249,17 @@ description: What a DMS (Data Management System) is, and why every product is an
   <!-- ── PART 4: SCENARIOS ── -->
   <section class="features-section">
     <div class="section-inner">
-      <span class="section-label">Part 4 — Real-World Scenarios</span>
-      <h2 class="section-title">The entity-plus-flow model in practice</h2>
+      <span class="section-label">Part 4 — ELM in Practice</span>
+      <h2 class="section-title">The same model, across very different industries</h2>
+      <p class="integrations-desc" style="max-width:none;">In each case, the entity and its lifecycle are defined once, and every channel reads from and acts on that single source of truth.</p>
       <div class="feat-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));">
         <div class="feat-card">
           <span class="feat-icon"><i class="bi bi-cart"></i></span>
           <div class="feat-title">E-Commerce Operations</div>
           <div class="feat-desc">
             <strong>Entity:</strong> Customer Order<br>
-            <strong>Flow:</strong> Creation → Payment Verification → Fulfillment → Transit → Delivery<br>
-            <strong>Touchpoints:</strong> REST API (Checkout), n8n (ERP Sync), Mobile (Push Notifications)
+            <strong>Lifecycle Flow:</strong> Creation → Payment Verification → Fulfillment → Transit → Delivery<br>
+            <strong>Touchpoints:</strong> REST API (Checkout), n8n (Inventory Sync), Mobile (Push Notifications)
           </div>
         </div>
         <div class="feat-card">
@@ -229,7 +267,7 @@ description: What a DMS (Data Management System) is, and why every product is an
           <div class="feat-title">Fintech Onboarding</div>
           <div class="feat-desc">
             <strong>Entity:</strong> KYC Application<br>
-            <strong>Flow:</strong> User Registration → Doc Analysis → Risk Evaluation → Approval/Rejection<br>
+            <strong>Lifecycle Flow:</strong> User Registration → Doc Analysis → Risk Evaluation → Approval/Rejection<br>
             <strong>Touchpoints:</strong> AI MCP (Verification), WebApp (User UI), REST API (Banking Engine)
           </div>
         </div>
@@ -238,7 +276,7 @@ description: What a DMS (Data Management System) is, and why every product is an
           <div class="feat-title">IoT &amp; Fleet Logistics</div>
           <div class="feat-desc">
             <strong>Entity:</strong> Telemetry Tracker<br>
-            <strong>Flow:</strong> Asset Provisioning → In-Transit Monitoring → Alert Detection → Maintenance<br>
+            <strong>Lifecycle Flow:</strong> Asset Provisioning → In-Transit Monitoring → Alert Detection → Maintenance<br>
             <strong>Touchpoints:</strong> REST API (Sensors), n8n (Service Dispatch), Mobile (Driver Dashboard)
           </div>
         </div>
@@ -247,7 +285,7 @@ description: What a DMS (Data Management System) is, and why every product is an
           <div class="feat-title">SaaS Subscription Engine</div>
           <div class="feat-desc">
             <strong>Entity:</strong> Workspace Account<br>
-            <strong>Flow:</strong> Free Trial → Payment Trigger → Active Tier → Renewal / Cancellation<br>
+            <strong>Lifecycle Flow:</strong> Free Trial → Payment Trigger → Active Tier → Renewal / Cancellation<br>
             <strong>Touchpoints:</strong> REST API (Stripe Webhook), AI MCP (Churn Risk Alert), WebApp (Billing UI)
           </div>
         </div>
@@ -259,16 +297,19 @@ description: What a DMS (Data Management System) is, and why every product is an
   <section class="split-section">
     <div class="section-inner" style="max-width:760px;">
       <span class="section-label">Building the future</span>
-      <h2 class="split-title">An entity-plus-flow mindset changes how digital systems are built</h2>
-      <p class="split-desc">By decoupling infrastructure management from core domain logic, development teams can launch features faster, adapt workflows seamlessly, and deliver real-time experiences across any client interface.</p>
-      <p class="split-desc" style="margin-bottom:0;">With Th1ngs operating as your zero-cost infrastructure foundation, you gain the operational power of enterprise orchestration, deep AI integration via MCP, and flexible multi-channel connectivity — allowing you to focus on building the logic that sets your product apart.</p>
+      <h2 class="split-title">Building the future of digital products with ELM</h2>
+      <p class="split-desc">Adopting Entity Lifecycle Management changes how digital systems are built, maintained, and scaled. By decoupling infrastructure management from core domain logic, development teams can launch features faster, adapt workflows seamlessly, and deliver real-time experiences across any client interface.</p>
+      <div style="border-left:3px solid var(--accent); padding-left:1.25rem; margin:1.75rem 0; font-family:var(--font-head); font-size:1.15rem; font-weight:600; color:var(--text); line-height:1.5;">
+        Software has always needed a system of record for the things that change over time. <span style="color:var(--accent);">ELM is that system of record — not for one domain, but for every entity with a lifecycle.</span>
+      </div>
+      <p class="split-desc" style="margin-bottom:0;">With Th1ngs as your zero-cost ELM foundation, you gain the operational power of enterprise orchestration, deep AI integration via MCP, and flexible multi-channel connectivity — allowing you to focus on building the logic that sets your product apart.</p>
     </div>
   </section>
 
   <!-- ── CTA ── -->
   <section class="cta-section">
     <div class="cta-inner">
-      <h2 class="cta-title">Ready to manage every<span class="cta-grad">Th1ng</span> as an entity with a flow?</h2>
+      <h2 class="cta-title">Ready to manage every<span class="cta-grad">Th1ng</span> with ELM?</h2>
       <p class="cta-sub">Deploy on cloud or your own infrastructure. Customize everything. Extend with plugins.</p>
       <a href="/#contact" class="btn-cta-white">Start for free <i class="bi bi-arrow-right"></i></a>
     </div>
